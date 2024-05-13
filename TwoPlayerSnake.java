@@ -142,10 +142,5 @@ public class TwoPlayerSnake extends JFrame implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {}
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            TwoPlayerSnake game = new TwoPlayerSnake();
-            game.setVisible(true);
-        });
-    }
+
 }
