@@ -44,6 +44,9 @@ public class GamePanel extends JPanel implements ActionListener{
     }
 
     public void play() {
+        //festlegen der startposi
+        player1[0][0]= player1[0][0]+100;
+        player1[1][0]= player1[1][0]+100;
         addFood();
         addPowerup();
         running = true;
@@ -191,8 +194,10 @@ public class GamePanel extends JPanel implements ActionListener{
             running = false;
         }
 
-        for (int i = length[1]; i > 0 ; i--) {
-
+        for (int i = length[0]; i > 0 ; i--) {
+            if (player1[0][i] == player2[0][i] && player1[1][i] == player2[1][i]){
+               System.out.println(player1[0][i]);
+            }
 
         }
 
