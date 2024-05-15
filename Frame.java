@@ -2,6 +2,10 @@ import javax.swing.JFrame;
 
 public class Frame extends JFrame {
 
+    /**
+     * Creating a Frame and starting the game
+     * @Author Dennis, Arman
+     */
     Frame(){
         GamePanel gamePanel = new GamePanel();
         this.add(gamePanel);
