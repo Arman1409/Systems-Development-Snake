@@ -1,13 +1,16 @@
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.Random;
-
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener{
 
-
+    /**
+     * Setting Up the class GamePanel as JPanel and creating the parameters for the game
+     * @Author Dennis,Nina
+     */
     static final int WIDTH = 500;
     static final int HEIGHT = 500;
     static final int UNIT_SIZE = 20;
@@ -33,6 +36,11 @@ public class GamePanel extends JPanel implements ActionListener{
     Random random;
     Timer timer;
 
+    /**
+     * Creating an initalizer for the class gamePanel
+     * Stetting up some few important game parameters
+     * @Author Dennis,Johnatan
+     */
     GamePanel() {
         random = new Random();
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -42,7 +50,11 @@ public class GamePanel extends JPanel implements ActionListener{
         this.addKeyListener(new MyKeyAdapter());
         play();
     }
-
+    /**
+     * The first function that is called
+     * defining the start point of player 1 and adds food and power ups
+     * @Author Dennis,Lucas
+     */
     public void play() {
         //festlegen der startposi
         player1[0][0]= player1[0][0]+100;
@@ -54,14 +66,22 @@ public class GamePanel extends JPanel implements ActionListener{
         timer = new Timer(80, this);
         timer.start();
     }
-
+    /**
+     * important for drawing graphics
+     * @Author Nina
+     */
     @Override
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         draw(graphics);
 
     }
-
+    /**
+     * Setting up the move functions for p1 and p2
+     * in the for loop the snakes will get moved
+     * in the if clause the direction is getting defined
+     * @Author Lucas, Dennis
+     */
     public void movep1() {
         for (int i = length[0]; i > 0; i--) {
             // shift the snake one unit to the desired direction to create a move
@@ -96,7 +116,10 @@ public class GamePanel extends JPanel implements ActionListener{
             player2[1][0] = player2[1][0] + UNIT_SIZE;
         }
     }
-
+    /**
+     * checking if the food and power up is picked up by one of the player
+     * @Author Nina
+     */
     public void checkFood() {
         if(player1[0][0] == foodX && player1[1][0] == foodY) {
             length[0]++;
@@ -108,19 +131,25 @@ public class GamePanel extends JPanel implements ActionListener{
             addFood();
         }
     }
-
     public void checkpowerup(){
         if(player1[0][0] == powerUPX && player1[1][0] == foodY){
               // drawblue();
                addPowerup();
         }
     }
+    /**
+     * WIP
+     * @Author Dennis
+     */
     public void drawblue(){
         for (int i = 1; i < length[0]; i++) {
 
         }
     }
-
+    /**
+     * Setting up the draw Functions and creating the drawing for the snakes and food
+     * @Author Lucas,Jan
+     */
     public void draw(Graphics graphics) {
 
         if (running) {
@@ -167,6 +196,11 @@ public class GamePanel extends JPanel implements ActionListener{
             graphics.fillRect(player2[0][i],player2[1][i], UNIT_SIZE, UNIT_SIZE);
         }
     }
+    /**
+     * Adds Food and the powerup
+     * @Author Dennis,Nina
+     */
+
     public void addFood() {
         foodX = random.nextInt((int)(WIDTH / UNIT_SIZE))*UNIT_SIZE;
         foodY = random.nextInt((int)(HEIGHT / UNIT_SIZE))*UNIT_SIZE;
@@ -177,6 +211,11 @@ public class GamePanel extends JPanel implements ActionListener{
         powerUPY = random.nextInt((int)(HEIGHT / UNIT_SIZE))*UNIT_SIZE;
     }
 
+    /**
+     * Checking if one of the player is hitting a Wall or themselsfs
+     * WIP: Hittin a other snake
+     * @Author Dennis,Nina
+     */
     public void checkHit() {
         // check if head run into its body
         for (int i = length[1]; i > 0; i--) {
@@ -205,7 +244,10 @@ public class GamePanel extends JPanel implements ActionListener{
             timer.stop();
         }
     }
-
+    /**
+     * Setting Up the class GamePanel as JPanel and
+     * @Author Lucas, Jan
+     */
     public void gameOver(Graphics graphics) {
         graphics.setColor(Color.red);
         graphics.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 50));
@@ -219,6 +261,10 @@ public class GamePanel extends JPanel implements ActionListener{
 
     }
 
+    /**
+     * Creating action listener and the KeyListner
+     * @Author Johnathan
+     */
     @Override
     public void actionPerformed(ActionEvent arg0) {
         if (running) {
