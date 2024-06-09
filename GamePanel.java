@@ -31,7 +31,9 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer timer;
 
     //immage
-    private BufferedImage apple;
+    private BufferedImage apple,subapple;
+    private BufferedImage snake1head,subsnake1head, snake1body,subsnake1body,snake1tail,subsnake1tail;
+    private BufferedImage snake2head,subsnake2head, snake2body,subsnake2body,snake2tail,subsnake2tail;
 
     GamePanel() {
         random = new Random();
@@ -141,8 +143,9 @@ public class GamePanel extends JPanel implements ActionListener {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        subapple = apple.getSubimage(0*32, 3*32,32,32);
+        graphics.drawImage(subapple,foodX,foodY,40,35,null);
 
-        graphics.drawImage(apple.getSubimage(0*32, 3*32,32,32),0,0,null);
     }
 
     public void drawpowerup(Graphics graphics) {
@@ -151,12 +154,21 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void drawsnake1(Graphics graphics) {
-        graphics.setColor(Color.white);
-        graphics.fillRect(player1[0][0], player1[1][0], UNIT_SIZE, UNIT_SIZE);
+        InputStream is1 = getClass().getResourceAsStream("/snake-graphics32.png");
+        try {
+            snake1head = ImageIO.read(is1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        subsnake1head = snake1head.getSubimage(4*32,1*32,32,32);
+        graphics.drawImage(subsnake1head,player1[0][0],player1[1][0],40,35,null);
+        /*
         for (int i = 1; i < length[0]; i++) {
             graphics.setColor(new Color(40, 200, 150));
             graphics.fillRect(player1[0][i], player1[1][i], UNIT_SIZE, UNIT_SIZE);
         }
+
+         */
     }
 
     public void drawsnake2(Graphics graphics) {
