@@ -1,6 +1,6 @@
 import javax.swing.JFrame;
 
-public class Frame extends JFrame {
+public class Frame extends JFrame  {
 
     /**
      * Creating a Frame and starting the game

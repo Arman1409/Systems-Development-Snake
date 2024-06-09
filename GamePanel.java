@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.util.Random;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel implements ActionListener{
+public class GamePanel extends JPanel implements Runnable{
 
     /**
      * Setting Up the class GamePanel as JPanel and creating the parameters for the game
@@ -36,6 +36,11 @@ public class GamePanel extends JPanel implements ActionListener{
     Random random;
     Timer timer;
 
+    //FPS
+    private final int FPS_SET = 120;
+    private Thread gameThread;
+
+
     /**
      * Creating an initalizer for the class gamePanel
      * Stetting up some few important game parameters
@@ -49,6 +54,7 @@ public class GamePanel extends JPanel implements ActionListener{
         this.addKeyListener(new MyKeyAdapter2());
         this.addKeyListener(new MyKeyAdapter());
         play();
+        startgameloop();
     }
     /**
      * The first function that is called
@@ -63,8 +69,6 @@ public class GamePanel extends JPanel implements ActionListener{
         addPowerup();
         running = true;
 
-        timer = new Timer(80, this);
-        timer.start();
     }
     /**
      * important for drawing graphics
@@ -241,7 +245,7 @@ public class GamePanel extends JPanel implements ActionListener{
         }
 
         if(!running) {
-            timer.stop();
+
         }
     }
     /**
@@ -265,8 +269,7 @@ public class GamePanel extends JPanel implements ActionListener{
      * Creating action listener and the KeyListner
      * @Author Johnathan
      */
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
+    public void action() {
         if (running) {
             movep2();
             movep1();
@@ -274,8 +277,32 @@ public class GamePanel extends JPanel implements ActionListener{
             checkpowerup();
             checkHit();
         }
-        repaint();
+
     }
+
+    public void startgameloop(){
+        gameThread = new Thread(this);
+        gameThread.start();
+
+    }
+
+    public void run() {
+        double timeFrame  = 1000000000.0/ FPS_SET;
+        long lastframe = System.nanoTime();
+        long now = System.nanoTime();
+
+        do {
+            now = System.nanoTime();
+            if (now - lastframe >= timeFrame) {
+                action();
+                repaint();
+                lastframe = now;
+            }
+
+        }while (running);
+
+    }
+
 
     public class MyKeyAdapter extends KeyAdapter {
         @Override
