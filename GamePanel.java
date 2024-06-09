@@ -1,6 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Random;
 import javax.swing.JPanel;
 
@@ -25,6 +29,9 @@ public class GamePanel extends JPanel implements ActionListener {
     boolean running = false;
     Random random;
     Timer timer;
+
+    //immage
+    private BufferedImage apple;
 
     GamePanel() {
         random = new Random();
@@ -128,8 +135,14 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void drawfood(Graphics graphics) {
-        graphics.setColor(new Color(210, 115, 90));
-        graphics.fillOval(foodX, foodY, UNIT_SIZE, UNIT_SIZE);
+        InputStream is = getClass().getResourceAsStream("/snake-graphics32.png");
+        try {
+            apple = ImageIO.read(is);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        graphics.drawImage(apple.getSubimage(0*32, 3*32,32,32),0,0,null);
     }
 
     public void drawpowerup(Graphics graphics) {
