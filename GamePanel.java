@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
 
@@ -35,6 +36,11 @@ public class GamePanel extends JPanel implements ActionListener {
     private BufferedImage snake1head,subsnake1head, snake1body,subsnake1body,snake1tail,subsnake1tail;
     private BufferedImage snake2head,subsnake2head, snake2body,subsnake2body,snake2tail,subsnake2tail;
 
+    private BufferedImage[] snakeheadani = new BufferedImage[4];
+    private int aniTick,aniIndex, aniSpeed = 70;
+
+    private ArrayList<BufferedImage> snake1 = new ArrayList<BufferedImage>();
+
     GamePanel() {
         random = new Random();
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -44,10 +50,12 @@ public class GamePanel extends JPanel implements ActionListener {
         this.addKeyListener(new MyKeyAdapter(this,false));
         this.setFocusable(true);
         play();
+        snake1.add(null);
     }
 
     public void play() {
         //festlegen der startposi
+        snakeHeadAnimationsetup();
         player1[0][0] = player1[0][0] + 100;
         player1[1][0] = player1[1][0] + 100;
         addFood();
@@ -102,6 +110,7 @@ public class GamePanel extends JPanel implements ActionListener {
             length[0]++;
             foodEaten++;
             addFood();
+            newsnakepart();
         } else if (player2[0][0] == foodX && player2[1][0] == foodY) {
             length[1]++;
             foodEaten++;
@@ -153,22 +162,69 @@ public class GamePanel extends JPanel implements ActionListener {
         graphics.fillRect(powerUPX, powerUPY, UNIT_SIZE, UNIT_SIZE);
     }
 
-    public void drawsnake1(Graphics graphics) {
+    private void snakeHeadAnimationsetup(){
+       loadImage();
+            snakeheadani[0] = snake1head.getSubimage(3*32,0*32,32,32);
+            snakeheadani[1] = snake1head.getSubimage(4*32,0*32,32,32);
+            snakeheadani[2] = snake1head.getSubimage(3*32,1*32,32,32);
+            snakeheadani[3] = snake1head.getSubimage(4*32,1*32,32,32);
+
+
+    }
+    private void loadImage() {
         InputStream is1 = getClass().getResourceAsStream("/snake-graphics32.png");
         try {
             snake1head = ImageIO.read(is1);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        subsnake1head = snake1head.getSubimage(4*32,1*32,32,32);
-        graphics.drawImage(subsnake1head,player1[0][0],player1[1][0],40,35,null);
-        /*
-        for (int i = 1; i < length[0]; i++) {
-            graphics.setColor(new Color(40, 200, 150));
-            graphics.fillRect(player1[0][i], player1[1][i], UNIT_SIZE, UNIT_SIZE);
-        }
+    }
 
-         */
+    private void snakeHeadanimation(){
+
+        switch (direction){
+            case 'D':
+                aniIndex = 3;
+                snake1.set(0, snakeheadani[3]);
+                break;
+
+                case 'U':
+                    aniIndex = 0;
+                    snake1.set(0, snakeheadani[0]);
+                    break;
+
+                    case 'L':
+                        aniIndex = 2;
+                        snake1.set(0, snakeheadani[2]);
+                        break;
+
+                        case 'R':
+                            aniIndex = 1;
+                            snake1.set(0, snakeheadani[1]);
+                            break;
+        }
+    }
+
+    private void newsnakepart(){
+        loadImage();
+
+        snake1.add(player1.length,snake1head.getSubimage(2*32,1*32,32,32));
+
+    }
+
+    public void drawsnake1(Graphics graphics) {
+        loadImage();
+
+        snakeHeadanimation();
+        graphics.drawImage(snake1.get(0),player1[0][0],player1[1][0],40,35,null);
+        //graphics.drawImage(snake1.get(1),player1[0][1],player1[1][1],40,35,null);
+        /*
+        for (int i = 1; i < snake1.toArray().length; i++) {
+
+           graphics.drawImage(snake1.get(1),player1[0][i],player1[1][i],40,35,null);
+        }
+*/
+
     }
 
     public void drawsnake2(Graphics graphics) {
