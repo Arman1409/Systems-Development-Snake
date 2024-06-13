@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel implements ActionListener {
     static final int WIDTH = 500;
     static final int HEIGHT = 500;
-    static final int UNIT_SIZE = 20;
+    static final int UNIT_SIZE = 40;
     static final int NUMBER_OF_UNITS = (WIDTH * HEIGHT) / (UNIT_SIZE * UNIT_SIZE);
     // hold x and y coordinates for body parts of the snake
     final int player1[][] = new int[2][NUMBER_OF_UNITS];
@@ -55,6 +55,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void play() {
         //festlegen der startposi
+        newsnakepart();
         snakeHeadAnimationsetup();
         player1[0][0] = player1[0][0] + 100;
         player1[1][0] = player1[1][0] + 100;
@@ -208,16 +209,16 @@ public class GamePanel extends JPanel implements ActionListener {
     private void newsnakepart(){
         loadImage();
 
-        snake1.add(player1.length,snake1head.getSubimage(2*32,1*32,32,32));
+      snake1.add(snake1head.getSubimage(2*32,1*32,32,32));
 
     }
 
     public void drawsnake1(Graphics graphics) {
         loadImage();
-
+        newsnakepart();
         snakeHeadanimation();
-        graphics.drawImage(snake1.get(0),player1[0][0],player1[1][0],40,35,null);
-        //graphics.drawImage(snake1.get(1),player1[0][1],player1[1][1],40,35,null);
+        graphics.drawImage(snake1.get(0),player1[0][0],player1[1][0],40,40,null);
+        graphics.drawImage(snake1.get(2),player1[0][1],player1[1][1],40,40,null);
         /*
         for (int i = 1; i < snake1.toArray().length; i++) {
 
