@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 
 public class Frame extends JFrame implements Runnable  {
-    private static int FPS_set = 120;
+    private static int FPS_set = 5;
     private int frames = 0;
     private Thread gameThread;
     /**
@@ -29,7 +29,7 @@ public class Frame extends JFrame implements Runnable  {
 
     @Override
     public void run() {
-        double timeFrame  = 1000000.0/ FPS_set;
+        double timeFrame  = 100000.0/ FPS_set;
         long lastframe = System.nanoTime();
         long now = System.nanoTime();
 

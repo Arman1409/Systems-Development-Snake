@@ -15,8 +15,8 @@ public class GamePanel extends JPanel implements ActionListener {
     static final int UNIT_SIZE = 40;
     static final int NUMBER_OF_UNITS = (WIDTH * HEIGHT) / (UNIT_SIZE * UNIT_SIZE);
     // hold x and y coordinates for body parts of the snake
-    final int player1[][] = new int[2][NUMBER_OF_UNITS];
-    final int player2[][] = new int[2][NUMBER_OF_UNITS];
+    final int[][] player1 = new int[2][NUMBER_OF_UNITS];
+    final int[][] player2 = new int[2][NUMBER_OF_UNITS];
     // initial length of the snake
     int[] length = {5, 5};
     int foodEaten;
@@ -33,13 +33,20 @@ public class GamePanel extends JPanel implements ActionListener {
 
     //immage
     private BufferedImage apple,subapple;
-    private BufferedImage snake1head,subsnake1head, snake1body,subsnake1body,snake1tail,subsnake1tail;
+    private BufferedImage snake1image;
     private BufferedImage snake2head,subsnake2head, snake2body,subsnake2body,snake2tail,subsnake2tail;
 
-    private BufferedImage[] snakeheadani = new BufferedImage[4];
-    private int aniTick,aniIndex, aniSpeed = 70;
+    private final BufferedImage[] snakeheadani = new BufferedImage[4];
+    private int aniTick;
+    private int aniIndex;
+    private final int aniSpeed = 70;
 
-    private ArrayList<BufferedImage> snake1 = new ArrayList<BufferedImage>();
+    private final ArrayList<BufferedImage> snake1 = new ArrayList<BufferedImage>();
+    private char lastdirection = 'D';
+    private char currentHeadDirection = 'H';
+    private boolean istured = false;
+    private int indexsnake = 1;
+    private int test = 0;
 
     GamePanel() {
         random = new Random();
@@ -50,11 +57,12 @@ public class GamePanel extends JPanel implements ActionListener {
         this.addKeyListener(new MyKeyAdapter(this,false));
         this.setFocusable(true);
         play();
-        snake1.add(null);
+
     }
 
     public void play() {
         //festlegen der startposi
+        loadImage();
         newsnakepart();
         snakeHeadAnimationsetup();
         player1[0][0] = player1[0][0] + 100;
@@ -87,6 +95,7 @@ public class GamePanel extends JPanel implements ActionListener {
         } else {
             player1[1][0] = player1[1][0] + UNIT_SIZE;
         }
+
     }
 
     public void movep2() {
@@ -136,7 +145,7 @@ public class GamePanel extends JPanel implements ActionListener {
             drawfood(graphics);
             drawpowerup(graphics);
             drawsnake1(graphics);
-            drawsnake2(graphics);
+            //drawsnake2(graphics);
             graphics.setColor(Color.white);
             graphics.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 25));
             FontMetrics metrics = getFontMetrics(graphics.getFont());
@@ -153,7 +162,7 @@ public class GamePanel extends JPanel implements ActionListener {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        subapple = apple.getSubimage(0*32, 3*32,32,32);
+        subapple = apple.getSubimage(0, 3*32,32,32);
         graphics.drawImage(subapple,foodX,foodY,40,35,null);
 
     }
@@ -164,20 +173,20 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     private void snakeHeadAnimationsetup(){
-       loadImage();
-            snakeheadani[0] = snake1head.getSubimage(3*32,0*32,32,32);
-            snakeheadani[1] = snake1head.getSubimage(4*32,0*32,32,32);
-            snakeheadani[2] = snake1head.getSubimage(3*32,1*32,32,32);
-            snakeheadani[3] = snake1head.getSubimage(4*32,1*32,32,32);
+
+            snakeheadani[0] = snake1image.getSubimage(3*32, 0,32,32);
+            snakeheadani[1] = snake1image.getSubimage(4*32, 0,32,32);
+            snakeheadani[2] = snake1image.getSubimage(3*32, 32,32,32);
+            snakeheadani[3] = snake1image.getSubimage(4*32, 32,32,32);
 
            for (int i = 0; i < length[0]; i++){
-            snake1.add(snake1head.getSubimage(2 * 32, 1 * 32, 32, 32));
+            snake1.add(snake1image.getSubimage(2 * 32, 32, 32, 32));
         }
     }
     private void loadImage() {
         InputStream is1 = getClass().getResourceAsStream("/snake-graphics32.png");
         try {
-            snake1head = ImageIO.read(is1);
+            snake1image = ImageIO.read(is1);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -189,43 +198,50 @@ public class GamePanel extends JPanel implements ActionListener {
             case 'D':
                 aniIndex = 3;
                 snake1.set(0, snakeheadani[3]);
+                currentHeadDirection = 'H';
                 break;
 
                 case 'U':
                     aniIndex = 0;
                     snake1.set(0, snakeheadani[0]);
+                    currentHeadDirection = 'H';
                     break;
 
                     case 'L':
                         aniIndex = 2;
                         snake1.set(0, snakeheadani[2]);
+                        currentHeadDirection = 'V';
                         break;
 
                         case 'R':
                             aniIndex = 1;
                             snake1.set(0, snakeheadani[1]);
+                            currentHeadDirection = 'V';
                             break;
         }
     }
 
     private void newsnakepart(){
-        loadImage();
 
-      snake1.add(snake1head.getSubimage(2*32,1*32,32,32));
+
+      snake1.add(snake1image.getSubimage(2*32, 32,32,32));
 
     }
 
-    private void checkturn(){
-        loadImage();
-        char lastdirection = 'D';
+    private  void checkturn(){
+
+
+
 
         if (lastdirection != direction){
 
         if (direction == 'L') {
            if(lastdirection == 'D') {
-               snake1.set(1, snake1head.getSubimage(2 * 32, 0 * 32, 32, 32));
+               snake1.set(1, snake1image.getSubimage(2 * 32, 0, 32, 32));
+               istured = true;
+               lastdirection = direction;
            }else if (lastdirection == 'U') {
-               snake1.set(1, snake1head.getSubimage(2 * 32, 2 * 32, 32, 32));
+               snake1.set(1, snake1image.getSubimage(2 * 32, 2 * 32, 32, 32));
            }
         } else if (direction == 'R') {
 
@@ -237,30 +253,47 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    private void cycle(){
+    public void cycle(){
 
-        for (int i = 1; i < snake1.toArray().length-1; i++) {
-
-            snake1.set(i+1, snake1.get(i));
-
+/*
+        if (currentHeadDirection == 'H' && istured == false){
+            snake1.set(1, snake1image.getSubimage(32, 0, 32, 32));
+            istured = false;
+        }else if (currentHeadDirection == 'V'&& istured == false){
+            snake1.set(1, snake1image.getSubimage(2 * 32, 32, 32, 32));
+            istured = false;
+        }else {
+            istured =false;
         }
+*/
+
+        while (indexsnake < snake1.size() -1){
+            BufferedImage temp = snake1.get(indexsnake);
+            snake1.set(indexsnake,snake1.get(indexsnake+1));
+            snake1.set(indexsnake+1,temp);
+            indexsnake++;
+        }
+        indexsnake = 1;
+
 
     }
 
     public void drawsnake1(Graphics graphics) {
-        loadImage();
-        newsnakepart();
+
         snakeHeadanimation();
         checkturn();
-        cycle();
-        graphics.drawImage(snake1.getFirst(),player1[0][0],player1[1][0],40,40,null);
-
+        graphics.drawImage(snake1.get(0),player1[0][0],player1[1][0],40,40,null);
 
         for (int i = 1; i < snake1.toArray().length; i++) {
            graphics.drawImage(snake1.get(i),player1[0][i],player1[1][i],40,40,null);
         }
 
-
+        if(test == 1){
+            cycle();
+            test = 0;
+        }else {
+        test++;
+        }
      }
 
     public void drawsnake2(Graphics graphics) {
@@ -273,13 +306,13 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void addFood() {
-        foodX = random.nextInt((int) (WIDTH / UNIT_SIZE)) * UNIT_SIZE;
-        foodY = random.nextInt((int) (HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
+        foodX = random.nextInt(WIDTH / UNIT_SIZE) * UNIT_SIZE;
+        foodY = random.nextInt(HEIGHT / UNIT_SIZE) * UNIT_SIZE;
     }
 
     public void addPowerup() {
-        powerUPX = random.nextInt((int) (WIDTH / UNIT_SIZE)) * UNIT_SIZE;
-        powerUPY = random.nextInt((int) (HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
+        powerUPX = random.nextInt(WIDTH / UNIT_SIZE) * UNIT_SIZE;
+        powerUPY = random.nextInt(HEIGHT / UNIT_SIZE) * UNIT_SIZE;
     }
 
     public void checkHit() {
@@ -325,11 +358,12 @@ public class GamePanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0) {
         if (running) {
-            movep2();
+          //  movep2();
             movep1();
             checkFood();
             checkpowerup();
-            checkHit();
+
+           // checkHit();
 
         }
 
