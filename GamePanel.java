@@ -170,7 +170,9 @@ public class GamePanel extends JPanel implements ActionListener {
             snakeheadani[2] = snake1head.getSubimage(3*32,1*32,32,32);
             snakeheadani[3] = snake1head.getSubimage(4*32,1*32,32,32);
 
-
+           for (int i = 0; i < length[0]; i++){
+            snake1.add(snake1head.getSubimage(2 * 32, 1 * 32, 32, 32));
+        }
     }
     private void loadImage() {
         InputStream is1 = getClass().getResourceAsStream("/snake-graphics32.png");
@@ -213,20 +215,53 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+    private void checkturn(){
+        loadImage();
+        char lastdirection = 'D';
+
+        if (lastdirection != direction){
+
+        if (direction == 'L') {
+           if(lastdirection == 'D') {
+               snake1.set(1, snake1head.getSubimage(2 * 32, 0 * 32, 32, 32));
+           }else if (lastdirection == 'U') {
+               snake1.set(1, snake1head.getSubimage(2 * 32, 2 * 32, 32, 32));
+           }
+        } else if (direction == 'R') {
+
+        }else if (direction == 'U') {
+
+        }
+        }else {
+            lastdirection = direction;
+        }
+    }
+
+    private void cycle(){
+
+        for (int i = 1; i < snake1.toArray().length-1; i++) {
+
+            snake1.set(i+1, snake1.get(i));
+
+        }
+
+    }
+
     public void drawsnake1(Graphics graphics) {
         loadImage();
         newsnakepart();
         snakeHeadanimation();
-        graphics.drawImage(snake1.get(0),player1[0][0],player1[1][0],40,40,null);
-        graphics.drawImage(snake1.get(2),player1[0][1],player1[1][1],40,40,null);
-        /*
+        checkturn();
+        cycle();
+        graphics.drawImage(snake1.getFirst(),player1[0][0],player1[1][0],40,40,null);
+
+
         for (int i = 1; i < snake1.toArray().length; i++) {
-
-           graphics.drawImage(snake1.get(1),player1[0][i],player1[1][i],40,35,null);
+           graphics.drawImage(snake1.get(i),player1[0][i],player1[1][i],40,40,null);
         }
-*/
 
-    }
+
+     }
 
     public void drawsnake2(Graphics graphics) {
         graphics.setColor(Color.white);
