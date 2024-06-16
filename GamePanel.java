@@ -45,7 +45,7 @@ public class GamePanel extends JPanel implements ActionListener {
     private char lastdirection = 'D';
     private char currentHeadDirection = 'H';
     private boolean istured = false;
-    private int indexsnake = 1;
+    private int indexsnakee = 1;
     private int test = 0;
 
     GamePanel() {
@@ -253,7 +253,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    public void cycle(){
+    public void cycle(int indexsnake){
 
 /*
         if (currentHeadDirection == 'H' && istured == false){
@@ -267,13 +267,13 @@ public class GamePanel extends JPanel implements ActionListener {
         }
 */
 
-        while (indexsnake < snake1.size() -1){
+
             BufferedImage temp = snake1.get(indexsnake);
             snake1.set(indexsnake,snake1.get(indexsnake+1));
             snake1.set(indexsnake+1,temp);
-            indexsnake++;
-        }
-        indexsnake = 1;
+
+
+
 
 
     }
@@ -288,11 +288,20 @@ public class GamePanel extends JPanel implements ActionListener {
            graphics.drawImage(snake1.get(i),player1[0][i],player1[1][i],40,40,null);
         }
 
-        if(test == 1){
-            cycle();
-            test = 0;
-        }else {
-        test++;
+        if (snake1.size() >= 5) {
+            if (test == 1) {
+                    cycle(indexsnakee);
+
+                if (indexsnakee < snake1.size() - 1) {
+                    indexsnakee++;
+                } else {
+                    indexsnakee = 1;
+                }
+                test = 0;
+
+            } else {
+                test++;
+            }
         }
      }
 
