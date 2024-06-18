@@ -47,6 +47,8 @@ public class GamePanel extends JPanel implements ActionListener {
     private boolean istured = false;
     private int indexsnakee = 1;
     private int test = 0;
+    private int test2 = 2;
+    private int test3 = 0;
 
     GamePanel() {
         random = new Random();
@@ -156,13 +158,8 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void drawfood(Graphics graphics) {
-        InputStream is = getClass().getResourceAsStream("/snake-graphics32.png");
-        try {
-            apple = ImageIO.read(is);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        subapple = apple.getSubimage(0, 3*32,32,32);
+
+        subapple = snake1image.getSubimage(0, 3*32,32,32);
         graphics.drawImage(subapple,foodX,foodY,40,35,null);
 
     }
@@ -239,6 +236,7 @@ public class GamePanel extends JPanel implements ActionListener {
            if(lastdirection == 'D') {
                snake1.set(1, snake1image.getSubimage(2 * 32, 0, 32, 32));
                istured = true;
+               indexsnakee = 3;
                lastdirection = direction;
            }else if (lastdirection == 'U') {
                snake1.set(1, snake1image.getSubimage(2 * 32, 2 * 32, 32, 32));
@@ -255,22 +253,38 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void cycle(int indexsnake){
 
-/*
-        if (currentHeadDirection == 'H' && istured == false){
-            snake1.set(1, snake1image.getSubimage(32, 0, 32, 32));
-            istured = false;
-        }else if (currentHeadDirection == 'V'&& istured == false){
-            snake1.set(1, snake1image.getSubimage(2 * 32, 32, 32, 32));
-            istured = false;
-        }else {
-            istured =false;
-        }
-*/
 
 
+        if(indexsnake <= length[0]-1) {
             BufferedImage temp = snake1.get(indexsnake);
-            snake1.set(indexsnake,snake1.get(indexsnake+1));
-            snake1.set(indexsnake+1,temp);
+           if(snake1.get(indexsnake) == snake1image.getSubimage(2 * 32, 32, 32, 32) || snake1.get(indexsnake) == snake1image.getSubimage(32, 0, 32, 32)) {
+               if (currentHeadDirection == 'H') {
+                   snake1.set(1, snake1image.getSubimage(32, 0, 32, 32));
+               } else if (currentHeadDirection == 'V') {
+                   snake1.set(1, snake1image.getSubimage(2 * 32, 32, 32, 32));
+               }
+           }else {
+               snake1.set(indexsnake, snake1.get(indexsnake + 1));
+           }
+            snake1.set(indexsnake + 1, temp);
+
+          /* if (test3 == 2) {
+               test3 = 0;
+               if (currentHeadDirection == 'H') {
+                   snake1.set(1, snake1image.getSubimage(32, 0, 32, 32));
+                   istured = false;
+               } else if (currentHeadDirection == 'V') {
+                   snake1.set(1, snake1image.getSubimage(2 * 32, 32, 32, 32));
+                   istured = false;
+               } else {
+                   istured = false;
+               }
+           }else {
+               test3++;
+           }
+
+           */
+        }
 
 
 
@@ -288,7 +302,7 @@ public class GamePanel extends JPanel implements ActionListener {
            graphics.drawImage(snake1.get(i),player1[0][i],player1[1][i],40,40,null);
         }
 
-        if (snake1.size() >= 5) {
+        if (test2 >= 10) {
             if (test == 1) {
                     cycle(indexsnakee);
 
@@ -303,6 +317,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 test++;
             }
         }
+        test2++;
      }
 
     public void drawsnake2(Graphics graphics) {
