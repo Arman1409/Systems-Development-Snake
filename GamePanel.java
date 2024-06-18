@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends JPanel {
     static final int WIDTH = 500;
     static final int HEIGHT = 500;
     static final int UNIT_SIZE = 40;
@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements ActionListener {
     boolean spacepressed = false;
     boolean running = false;
     Random random;
-    Timer timer;
+
 
     //immage
     private BufferedImage apple,subapple;
@@ -72,8 +72,6 @@ public class GamePanel extends JPanel implements ActionListener {
         addFood();
         addPowerup();
         running = true;
-        timer = new Timer(80, this);
-        timer.start();
     }
 
     @Override
@@ -147,7 +145,7 @@ public class GamePanel extends JPanel implements ActionListener {
             drawfood(graphics);
             drawpowerup(graphics);
             drawsnake1(graphics);
-            //drawsnake2(graphics);
+            drawsnake2(graphics);
             graphics.setColor(Color.white);
             graphics.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 25));
             FontMetrics metrics = getFontMetrics(graphics.getFont());
@@ -364,7 +362,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
 
         if (!running) {
-            timer.stop();
+
         }
     }
 
@@ -379,17 +377,17 @@ public class GamePanel extends JPanel implements ActionListener {
         graphics.drawString("Score: " + foodEaten, (WIDTH - metrics.stringWidth("Score: " + foodEaten)) / 2, graphics.getFont().getSize());
     }
 
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        if (running) {
-          //  movep2();
-            movep1();
-            checkFood();
-            checkpowerup();
 
-           // checkHit();
+        public void updateGame(){
+            if (running) {
+                 movep2();
+                movep1();
+                checkFood();
+                checkpowerup();
+                // checkHit();
 
+            }
         }
 
-    }
+
 }

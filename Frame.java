@@ -1,15 +1,17 @@
 import javax.swing.JFrame;
 
 public class Frame extends JFrame implements Runnable  {
-    private static int FPS_set = 5;
+    private static int FPS_set = 120;
+    private final int UPS_set = 10;
     private int frames = 0;
     private Thread gameThread;
+    private GamePanel gamePanel;
     /**
      * Creating a Frame and starting the game
      * @Author Dennis, Arman
      */
     Frame(){
-        GamePanel gamePanel = new GamePanel();
+        gamePanel = new GamePanel();
         this.add(gamePanel);
         this.setTitle("snake");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,22 +29,51 @@ public class Frame extends JFrame implements Runnable  {
 
     }
 
+    public void update(){
+        gamePanel.updateGame();
+    }
+
     @Override
     public void run() {
-        double timeFrame  = 100000.0/ FPS_set;
-        long lastframe = System.nanoTime();
-        long now = System.nanoTime();
+        double timePerFrame = 1000000000.0 / FPS_set;
+        double timePerUpdate = 1000000000.0 / UPS_set;
+
+        long previousTime = System.nanoTime();
+
+        int frames = 0;
+        int updates = 0;
+        long lastChecked = System.currentTimeMillis();
+
+        double deltaU = 0;
+        double deltaF = 0;
 
         while (true){
-            now = System.nanoTime();
-            frames++;
-            if (now - lastframe >= timeFrame) {
-                repaint();
-                lastframe = now;
-                System.out.println("FPS: " + frames);
-                frames = 0;
+
+            long currentTime = System.nanoTime();
+
+            deltaU += (currentTime - previousTime) / timePerUpdate;
+            deltaF += (currentTime - previousTime) / timePerFrame;
+            previousTime = currentTime;
+
+            if (deltaU >= 1){
+                update();
+                updates ++;
+                deltaU--;
             }
 
+            if (deltaF >= 1) {
+                gamePanel.repaint();
+                frames++;
+                deltaF--;
+
+            }
+            if (System.currentTimeMillis() - lastChecked >= 1000) {
+                lastChecked = System.currentTimeMillis();
+                System.out.println("FPS: " + frames + " | UPS: " + updates);
+                frames = 0;
+                updates = 0;
+
+            }
         }
 
     }
