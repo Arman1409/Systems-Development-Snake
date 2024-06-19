@@ -1,3 +1,7 @@
+package main;
+
+import Gamestates.Gamestate;
+
 import javax.swing.JFrame;
 
 public class Frame extends JFrame implements Runnable  {
@@ -7,7 +11,7 @@ public class Frame extends JFrame implements Runnable  {
     private Thread gameThread;
     private GamePanel gamePanel;
     /**
-     * Creating a Frame and starting the game
+     * Creating a main.main.Frame and starting the game
      * @Author Dennis, Arman
      */
     Frame(){
@@ -30,7 +34,32 @@ public class Frame extends JFrame implements Runnable  {
     }
 
     public void update(){
-        gamePanel.updateGame();
+
+        switch (Gamestate.state){
+            case MENU:
+
+            break;
+
+            case PLAYING:
+                gamePanel.updateGame();
+
+            default:
+                break;
+        }
+    }
+
+    public void render(){
+        switch (Gamestate.state){
+            case MENU:
+
+                break;
+
+            case PLAYING:
+                gamePanel.repaint();
+
+            default:
+                break;
+        }
     }
 
     @Override
@@ -62,7 +91,7 @@ public class Frame extends JFrame implements Runnable  {
             }
 
             if (deltaF >= 1) {
-                gamePanel.repaint();
+                render();
                 frames++;
                 deltaF--;
 

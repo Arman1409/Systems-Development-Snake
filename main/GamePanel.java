@@ -1,13 +1,16 @@
+package main;
+
+import inputs.MyKeyAdapter;
+
 import java.awt.*;
-import java.awt.event.*;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
+import inputs.MyKeyAdapter;
 
 public class GamePanel extends JPanel {
     static final int WIDTH = 500;
@@ -24,8 +27,17 @@ public class GamePanel extends JPanel {
     int foodY;
     int powerUPX;
     int powerUPY;
+
+    public char getDirection() {
+        return direction;
+    }
+
+    public void setDirection(char direction) {
+        this.direction = direction;
+    }
+
     char direction = 'D';
-    char player2direction = 'D';
+    public char player2direction = 'D';
     boolean spacepressed = false;
     boolean running = false;
     Random random;
