@@ -21,10 +21,6 @@ public class ImageLoaderSnake extends ImageLoaderabstract {
         super(filename);
     }
 
-    @Override
-    void Imagemaker() {
-
-    }
 }
 
 

@@ -1,22 +1,32 @@
 package main;
 
-import Gamestates.Gamestate;
+import Gamestates.*;
 
 import javax.swing.JFrame;
 
-public class Frame extends JFrame implements Runnable  {
+public class Game extends JFrame implements Runnable  {
+    public final static float SCALE = 2f;
     private static int FPS_set = 120;
     private final int UPS_set = 10;
     private int frames = 0;
     private Thread gameThread;
-    private GamePanel gamePanel;
+    private SnakeGamePanle snakeGamePanle;
+
+    private Playing playing;
+    private Menu menu;
+
+    public final static int TILES_DEFAULT_SIZE = 32;
+    public final static int TILES_IN_WIDTH = 26;
+    public final static int TILES_IN_HEIGHT = 14;
+    public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
+    public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
+    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
     /**
      * Creating a main.main.Frame and starting the game
      * @Author Dennis, Arman
      */
-    Frame(){
-        gamePanel = new GamePanel();
-        this.add(gamePanel);
+    Game(){
+        initClasses();
         this.setTitle("snake");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -25,6 +35,12 @@ public class Frame extends JFrame implements Runnable  {
         this.setLocationRelativeTo(null);
         startgameloop();
 
+    }
+
+    private void initClasses() {
+       // menu = new Menu(this);
+        snakeGamePanle = new SnakeGamePanle();
+        this.add(snakeGamePanle);
     }
 
     private void startgameloop(){
@@ -41,7 +57,7 @@ public class Frame extends JFrame implements Runnable  {
             break;
 
             case PLAYING:
-                gamePanel.updateGame();
+                snakeGamePanle.updateGame();
 
             default:
                 break;
@@ -55,7 +71,7 @@ public class Frame extends JFrame implements Runnable  {
                 break;
 
             case PLAYING:
-                gamePanel.repaint();
+                snakeGamePanle.repaint();
 
             default:
                 break;

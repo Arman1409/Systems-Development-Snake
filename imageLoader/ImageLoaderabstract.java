@@ -5,13 +5,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-public abstract class ImageLoaderabstract {
+public class ImageLoaderabstract {
 
 
     private BufferedImage loadedImage;
     private String filename;
 
-    protected ImageLoaderabstract(String filename) {
+    public ImageLoaderabstract(String filename) {
         this.filename = filename;
         loadImage();
     }
@@ -25,7 +25,6 @@ public abstract class ImageLoaderabstract {
         }
     }
 
-    abstract void Imagemaker();
 
     public BufferedImage getLoadedImage() {
         return loadedImage;

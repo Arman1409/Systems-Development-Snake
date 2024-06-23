@@ -13,16 +13,13 @@ public class ImageLoaderMenu extends ImageLoaderabstract {
         super(filename);
     }
 
-    @Override
-    void Imagemaker() {
-
-
-
-    }
         private void makebutton(){
             SingleplayerButton[1] = image.getSubimage(0, 0, image.getWidth(), image.getHeight());
             SingleplayerButton[2] = image.getSubimage(image.getWidth() - 1, 0, image.getWidth(), image.getHeight());
             SingleplayerButton[3] = image.getSubimage(image.getWidth() - 2, 0, image.getWidth(), image.getHeight());
         }
 
+    public BufferedImage[] getSingleplayerButton() {
+        return SingleplayerButton;
+    }
 }

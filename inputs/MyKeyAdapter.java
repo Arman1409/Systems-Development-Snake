@@ -1,7 +1,9 @@
 package inputs;
 
 import java.awt.event.*;
+
 import main.GamePanel;
+import main.*;
 
 
  public class MyKeyAdapter extends KeyAdapter {

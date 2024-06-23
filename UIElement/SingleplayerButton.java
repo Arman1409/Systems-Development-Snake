@@ -1,21 +1,22 @@
 package UIElement;
 
 import Gamestates.Gamestate;
-import imageLoader.ImageLoaderMenu;
+import imageLoader.ImageLoaderabstract;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-/*
-public class MenuButton {
+
+public class SingleplayerButton {
     private int xPos, yPos, rowIndex, index;
-    private int xOffsetCenter = B_WIDTH / 2;
+    private int xOffsetCenter = 140;
     private Gamestate state;
     private BufferedImage[] imgs;
+    private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Singleplayer.png");
     private boolean mouseOver, mousePressed;
     private Rectangle bounds;
 
 
-    public MenuButton(int xPos, int yPos, int rowIndex, Gamestate state) {
+    public SingleplayerButton(int xPos, int yPos, int rowIndex, Gamestate state) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.rowIndex = rowIndex;
@@ -25,14 +26,17 @@ public class MenuButton {
     }
 
     private void initBounds() {
-        bounds = new Rectangle(xPos - xOffsetCenter, yPos, B_WIDTH, B_HEIGHT);
+        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 140, 56);
 
     }
     private void loadImgs() {
         imgs = new BufferedImage[3];
-        BufferedImage temp =
+        BufferedImage temp = imageLoader.getLoadedImage();
         for (int i = 0; i < imgs.length; i++)
-            imgs[i] = temp.getSubimage(i * B_WIDTH_DEFAULT, rowIndex * B_HEIGHT_DEFAULT, B_WIDTH_DEFAULT, B_HEIGHT_DEFAULT);
+            imgs[i] = temp.getSubimage(i * 140, rowIndex * 56, 140, 56);
+    }
+
+    public Rectangle getBounds() {
+    return bounds;
     }
 }
-*/
