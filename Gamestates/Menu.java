@@ -12,15 +12,16 @@ import java.util.Random;
 
 
 public class Menu extends State implements StartMethods {
-    private SingleplayerButton[] buttons = new SingleplayerButton[3];
+    private SingleplayerButton[] buttons = new SingleplayerButton[1];
     private BufferedImage backgroundImg;
     private int menuX, menuY, menuWidth, menuHeight;
-    private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/ManuBackground.jpeg");
+    private final ImageLoaderabstract imageLoader = new ImageLoaderabstract("/ManuBackground.png");
 
     public Menu(Game game) {
         super(game);
-        Random random = new Random();
-       // this.setPreferredSize(new Dimension(Game.GAME_WIDTH, Game.GAME_HEIGHT));
+        loadBackground();
+        loadButtons();
+
 
     }
     private void loadBackground() {
@@ -31,15 +32,29 @@ public class Menu extends State implements StartMethods {
         menuY = (int) (45 * Game.SCALE);
 
     }
+    private void loadButtons() {
+        buttons[0] = new SingleplayerButton(Game.GAME_WIDTH / 2, (int) (150 * Game.SCALE), 0, Gamestate.PLAYING);
+       // buttons[1] = new MenuButton(Game.GAME_WIDTH / 2, (int) (220 * Game.SCALE), 1, Gamestate.OPTIONS);
+       // buttons[2] = new MenuButton(Game.GAME_WIDTH / 2, (int) (290 * Game.SCALE), 2, Gamestate.QUIT);
+    }
+
+
+
 
     @Override
     public void update() {
+        for (SingleplayerButton mb : buttons)
+            mb.update();
 
     }
 
     @Override
     public void draw(Graphics g) {
 
+        g.drawImage(backgroundImg, 0, 0,480,480, null);
+
+        for (SingleplayerButton mb : buttons)
+            mb.draw(g);
     }
 
     @Override
@@ -49,12 +64,24 @@ public class Menu extends State implements StartMethods {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        for(SingleplayerButton mb : buttons){
+            if(isIn(e,mb)){
+            mb.setMousePressed(true);
+            break;
+        }
+        }
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        for(SingleplayerButton mb : buttons){
+            if(isIn(e,mb)){
+                if (mb.isMousePressed()){
 
+                }
+            }
+        }
     }
 
     @Override

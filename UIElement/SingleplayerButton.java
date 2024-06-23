@@ -11,7 +11,7 @@ public class SingleplayerButton {
     private int xOffsetCenter = 140;
     private Gamestate state;
     private BufferedImage[] imgs;
-    private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Singleplayer.png");
+    private final ImageLoaderabstract imageLoadersinge = new ImageLoaderabstract("/Singleplayer.png");
     private boolean mouseOver, mousePressed;
     private Rectangle bounds;
 
@@ -31,12 +31,51 @@ public class SingleplayerButton {
     }
     private void loadImgs() {
         imgs = new BufferedImage[3];
-        BufferedImage temp = imageLoader.getLoadedImage();
+        BufferedImage temp = imageLoadersinge.getLoadedImage();
         for (int i = 0; i < imgs.length; i++)
-            imgs[i] = temp.getSubimage(i * 140, rowIndex * 56, 140, 56);
+            imgs[i] = temp.getSubimage(i*110, 0, 110, 36);
+    }
+
+    public void draw(Graphics g) {
+        g.drawImage(imgs[index], xPos - xOffsetCenter, yPos, 140, 56, null);
+
+
+    }
+
+    public void update() {
+        index = 0;
+        if (mouseOver)
+            index = 1;
+        if (mousePressed)
+            index = 2;
+    }
+    public boolean isMouseOver() {
+        return mouseOver;
+    }
+
+    public void setMouseOver(boolean mouseOver) {
+        this.mouseOver = mouseOver;
+    }
+
+    public boolean isMousePressed() {
+        return mousePressed;
+    }
+
+    public void setMousePressed(boolean mousePressed) {
+        this.mousePressed = mousePressed;
     }
 
     public Rectangle getBounds() {
-    return bounds;
+        return bounds;
     }
+
+    public void applyGamestate() {
+        Gamestate.state = state;
+    }
+
+    public void resetBools() {
+        mouseOver = false;
+        mousePressed = false;
+    }
+
 }

@@ -4,10 +4,13 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import inputs.MyKeyAdapter;
 import inputs.MouseInputs;
+
 import static main.Game.GAME_HEIGHT;
 import static main.Game.GAME_WIDTH;
 
+
 public class GamePanel extends JPanel {
+
 
     private MouseInputs mouseInputs;
     private Game game;
@@ -16,7 +19,6 @@ public class GamePanel extends JPanel {
         mouseInputs = new MouseInputs(this);
         this.game = game;
         setPanelSize();
-        addKeyListener(new MyKeyAdapter(this,true));
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
     }

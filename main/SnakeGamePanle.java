@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel {
+public class SnakeGamePanle extends JPanel {
     static final int WIDTH = 500;
     static final int HEIGHT = 500;
     static final int UNIT_SIZE = 40;
@@ -26,6 +26,7 @@ public class GamePanel extends JPanel {
     int foodY;
     int powerUPX;
     int powerUPY;
+    private GamePanel gamePanel;
 
     public char getDirection() {
         return direction;

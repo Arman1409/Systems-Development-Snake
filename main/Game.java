@@ -1,11 +1,13 @@
 package main;
 
 import Gamestates.*;
+import Gamestates.Menu;
 
 import javax.swing.JFrame;
+import java.awt.*;
 
 public class Game extends JFrame implements Runnable  {
-    public final static float SCALE = 2f;
+
     private static int FPS_set = 120;
     private final int UPS_set = 10;
     private int frames = 0;
@@ -15,24 +17,25 @@ public class Game extends JFrame implements Runnable  {
     private Playing playing;
     private Menu menu;
 
+    private GamePanel gamePanel;
+    private GameWindow gameWindow;
+
+    public final static float SCALE = 1f;
     public final static int TILES_DEFAULT_SIZE = 32;
-    public final static int TILES_IN_WIDTH = 26;
+    public final static int TILES_IN_WIDTH = 14;
     public final static int TILES_IN_HEIGHT = 14;
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
     public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
-    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
+    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;;
     /**
      * Creating a main.main.Frame and starting the game
      * @Author Dennis, Arman
      */
     Game(){
         initClasses();
-        this.setTitle("snake");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(false);
-        this.pack();
-        this.setVisible(true);
-        this.setLocationRelativeTo(null);
+
+       // gamePanel = new GamePanel(this);
+       // gameWindow = new GameWindow(gamePanel);
         startgameloop();
 
     }
@@ -41,6 +44,12 @@ public class Game extends JFrame implements Runnable  {
        // menu = new Menu(this);
         snakeGamePanle = new SnakeGamePanle();
         this.add(snakeGamePanle);
+        this.setTitle("snake");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.pack();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
     private void startgameloop(){
@@ -59,19 +68,30 @@ public class Game extends JFrame implements Runnable  {
             case PLAYING:
                 snakeGamePanle.updateGame();
 
+            break;
+
+            case MULTIPLAYER:
+                // Lucas
+                break;
+
             default:
                 break;
         }
     }
 
-    public void render(){
+    public void render(Graphics g){
         switch (Gamestate.state){
             case MENU:
-
+                menu.draw(g);
                 break;
 
             case PLAYING:
                 snakeGamePanle.repaint();
+                break;
+
+            case MULTIPLAYER:
+                // Lucas
+                break;
 
             default:
                 break;
@@ -107,7 +127,8 @@ public class Game extends JFrame implements Runnable  {
             }
 
             if (deltaF >= 1) {
-                render();
+                //gamePanel.repaint();
+                snakeGamePanle.repaint();
                 frames++;
                 deltaF--;
 
@@ -122,4 +143,5 @@ public class Game extends JFrame implements Runnable  {
         }
 
     }
+
 }

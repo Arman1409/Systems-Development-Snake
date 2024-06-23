@@ -9,9 +9,9 @@ import main.*;
  public class MyKeyAdapter extends KeyAdapter {
 
 
-     private GamePanel gamePanel;
+     private SnakeGamePanle gamePanel;
      private boolean arrowKeys;
-    public MyKeyAdapter(GamePanel gamePanel, boolean arrowKeys){
+    public MyKeyAdapter(SnakeGamePanle gamePanel, boolean arrowKeys){
         this.gamePanel = gamePanel;
         this.arrowKeys = arrowKeys;
     }

@@ -1,3 +1,4 @@
+/*
 package imageLoader;
 
 import java.awt.image.BufferedImage;
@@ -23,3 +24,6 @@ public class ImageLoaderMenu extends ImageLoaderabstract {
         return SingleplayerButton;
     }
 }
+
+
+ */

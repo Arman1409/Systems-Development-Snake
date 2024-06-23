@@ -1,3 +1,4 @@
+/*
 package imageLoader;
 
 import javax.imageio.ImageIO;
@@ -26,3 +27,6 @@ public class ImageLoaderSnake extends ImageLoaderabstract {
 
 
 
+
+
+ */
