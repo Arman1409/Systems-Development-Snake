@@ -1,11 +1,17 @@
+package inputs;
+
 import java.awt.event.*;
+
+import main.GamePanel;
+import main.*;
+
 
  public class MyKeyAdapter extends KeyAdapter {
 
 
-     private GamePanel gamePanel;
+     private SnakeGamePanle gamePanel;
      private boolean arrowKeys;
-    public MyKeyAdapter(GamePanel gamePanel, boolean arrowKeys){
+    public MyKeyAdapter(SnakeGamePanle gamePanel, boolean arrowKeys){
         this.gamePanel = gamePanel;
         this.arrowKeys = arrowKeys;
     }
@@ -15,23 +21,23 @@ import java.awt.event.*;
         if (arrowKeys) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
-                    if (gamePanel.direction != 'R') {
-                        gamePanel.direction = 'L';
+                    if (gamePanel.getDirection() != 'R') {
+                        gamePanel.setDirection('L');
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
-                    if (gamePanel.direction != 'L') {
-                        gamePanel.direction = 'R';
+                    if (gamePanel.getDirection() != 'L') {
+                        gamePanel.setDirection('R');
                     }
                     break;
                 case KeyEvent.VK_UP:
-                    if (gamePanel.direction != 'D') {
-                        gamePanel.direction = 'U';
+                    if (gamePanel.getDirection() != 'D') {
+                        gamePanel.setDirection('U');
                     }
                     break;
                 case KeyEvent.VK_DOWN:
-                    if (gamePanel.direction != 'U') {
-                        gamePanel.direction = 'D';
+                    if (gamePanel.getDirection() != 'U') {
+                        gamePanel.setDirection('D');
                     }
                     break;
             }
