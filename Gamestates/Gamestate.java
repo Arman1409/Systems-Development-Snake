@@ -4,5 +4,5 @@ public enum Gamestate {
 
     SINGLEPLAYER, MENU, MULTIPLAYER;
 
-    public static Gamestate state = SINGLEPLAYER;
+    public static Gamestate state = MENU;
 }

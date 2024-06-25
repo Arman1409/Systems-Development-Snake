@@ -45,6 +45,7 @@ public class Menu extends State implements StartMethods {
         for (SingleplayerButton mb : buttons)
             mb.update();
 
+        checkifpressed();
     }
 
     @Override
@@ -76,10 +77,9 @@ public class Menu extends State implements StartMethods {
     public void mouseReleased(MouseEvent e) {
         for(SingleplayerButton mb : buttons){
             if(isIn(e,mb)){
-                if (mb.isMousePressed()){
+                if (mb.isMousePressed());
                     mb.applyGamestate();
                     break;
-                }
             }
         }
         resetButtons();
@@ -110,4 +110,11 @@ public class Menu extends State implements StartMethods {
     public void keyReleased(KeyEvent e) {
 
     }
+
+    private void checkifpressed() {
+        if (buttons[0].isMousePressed()) {
+            Gamestate.state = Gamestate.SINGLEPLAYER;
+        }
+    }
+
 }

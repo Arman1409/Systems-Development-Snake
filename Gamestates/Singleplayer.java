@@ -46,7 +46,7 @@ public class Singleplayer extends State implements StartMethods {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImg, 0, 0,480,480, null);
+        g.drawImage(backgroundImg, 0, 0,singeWidth,singleHeight, null);
 
         snake.draw(g);
     }
