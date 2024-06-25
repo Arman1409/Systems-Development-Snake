@@ -15,6 +15,7 @@ public class Singleplayer extends State implements StartMethods {
     private Snake snake;
     private BufferedImage backgroundImg;
     private int singleX, singleY, singeWidth, singleHeight;
+    private int scorep1 = 0;
 
     public Singleplayer(Game game) {
         super(game);
