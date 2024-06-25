@@ -5,7 +5,7 @@ import Gamestates.Singleplayer;
 import imageLoader.ImageLoaderabstract;
 import main.Game;
 import main.GamePanel;
-import main.SnakeGamePanle;
+//import main.SnakeGamePanle;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

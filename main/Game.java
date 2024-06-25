@@ -12,7 +12,7 @@ public class Game extends JFrame implements Runnable  {
     private final int UPS_set = 10;
     private int frames = 0;
     private Thread gameThread;
-    private SnakeGamePanle snakeGamePanle;
+  //  private SnakeGamePanle snakeGamePanle;
 
     private Singleplayer singleplayer;
     private Menu menu;

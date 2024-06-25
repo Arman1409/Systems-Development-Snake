@@ -1,3 +1,4 @@
+/*
 package main;
 
 import inputs.MyKeyAdapter;
@@ -293,7 +294,7 @@ public class SnakeGamePanle extends JPanel {
                test3++;
            }
 
-           */
+
         }
 
 
@@ -403,3 +404,5 @@ public class SnakeGamePanle extends JPanel {
 
 
 }
+
+ */
