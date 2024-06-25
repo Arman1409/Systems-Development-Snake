@@ -2,7 +2,7 @@ package Gamestates;
 
 public enum Gamestate {
 
-    PLAYING, MENU, MULTIPLAYER;
+    SINGLEPLAYER, MENU, MULTIPLAYER;
 
-    public static Gamestate state = MENU;
+    public static Gamestate state = SINGLEPLAYER;
 }
