@@ -392,7 +392,7 @@ public class SnakeGamePanle extends JPanel {
 
         public void updateGame(){
             if (running) {
-                 movep2();
+                movep2();
                 movep1();
                 checkFood();
                 checkpowerup();

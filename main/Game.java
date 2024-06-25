@@ -14,7 +14,7 @@ public class Game extends JFrame implements Runnable  {
     private Thread gameThread;
     private SnakeGamePanle snakeGamePanle;
 
-    private Playing playing;
+    private Singleplayer singleplayer;
     private Menu menu;
 
     private GamePanel gamePanel;
@@ -27,21 +27,25 @@ public class Game extends JFrame implements Runnable  {
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
     public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
     public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;;
+
     /**
      * Creating a main.main.Frame and starting the game
      * @Author Dennis, Arman
      */
+
     Game(){
         initClasses();
-
-       // gamePanel = new GamePanel(this);
-       // gameWindow = new GameWindow(gamePanel);
+        gamePanel = new GamePanel(this);
+        gameWindow = new GameWindow(gamePanel);
+        gamePanel.requestFocus();
         startgameloop();
 
     }
 
     private void initClasses() {
-       // menu = new Menu(this);
+       menu = new Menu(this);
+       singleplayer = new Singleplayer(this);
+       /*
         snakeGamePanle = new SnakeGamePanle();
         this.add(snakeGamePanle);
         this.setTitle("snake");
@@ -50,7 +54,9 @@ public class Game extends JFrame implements Runnable  {
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+    */
     }
+
 
     private void startgameloop(){
         gameThread = new Thread(this);
@@ -62,11 +68,11 @@ public class Game extends JFrame implements Runnable  {
 
         switch (Gamestate.state){
             case MENU:
-
+            menu.update();
             break;
 
-            case PLAYING:
-                snakeGamePanle.updateGame();
+            case SINGLEPLAYER:
+                singleplayer.update();
 
             break;
 
@@ -85,8 +91,8 @@ public class Game extends JFrame implements Runnable  {
                 menu.draw(g);
                 break;
 
-            case PLAYING:
-                snakeGamePanle.repaint();
+            case SINGLEPLAYER:
+                singleplayer.draw(g);
                 break;
 
             case MULTIPLAYER:
@@ -127,8 +133,8 @@ public class Game extends JFrame implements Runnable  {
             }
 
             if (deltaF >= 1) {
-                //gamePanel.repaint();
-                snakeGamePanle.repaint();
+                gamePanel.repaint();
+               // snakeGamePanle.repaint();
                 frames++;
                 deltaF--;
 
@@ -144,4 +150,11 @@ public class Game extends JFrame implements Runnable  {
 
     }
 
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public Singleplayer getPlaying() {
+        return singleplayer;
+    }
 }
