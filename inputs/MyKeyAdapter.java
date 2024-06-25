@@ -1,4 +1,5 @@
-package inputs;
+
+/*package inputs;
 
 import java.awt.event.*;
 
@@ -67,3 +68,4 @@ import main.*;
         }
     }
 }
+*/
