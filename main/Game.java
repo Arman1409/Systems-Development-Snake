@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class Game extends JFrame implements Runnable  {
 
+    public boolean runninggame;
     private static int FPS_set = 120;
     private final int UPS_set = 10;
     private int frames = 0;
@@ -34,11 +35,13 @@ public class Game extends JFrame implements Runnable  {
      */
 
     Game(){
+        runninggame = true;
         initClasses();
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
         startgameloop();
+
         //nina ist dooof 30 cm Riesen Dildo aa
 
     }

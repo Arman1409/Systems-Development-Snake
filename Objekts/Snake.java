@@ -2,6 +2,7 @@ package Objekts;
 
 
 import Gamestates.Singleplayer;
+import Objekts.Utilities.ColissionControll;
 import imageLoader.ImageLoaderabstract;
 import main.Game;
 import main.GamePanel;
@@ -17,6 +18,7 @@ public class Snake {
 
     private GamePanel gamePanel;
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/snake-graphics32.png");
+    private ColissionControll cc;
 
     static final int WIDTH = 480;
     static final int HEIGHT = 480;
@@ -47,6 +49,7 @@ public class Snake {
     snake1image = imageLoader.getLoadedImage();
     snakeHeadAnimationsetup();
     newsnakepart();
+    cc = new ColissionControll();
     }
     public void movep1() {
         for (int i = length; i > 0; i--) {
@@ -68,6 +71,7 @@ public class Snake {
 
     public void update() {
     movep1();
+    //cc.checkHitp1();
     }
 
     public void draw(Graphics graphics) {
@@ -218,4 +222,23 @@ public class Snake {
     public void setDirection(char direction) {
         this.direction = direction;
     }
+
+    public int[][] getPlayer1() {
+        return player1;
+    }
+    public void setPlayer1(int[][] player1) {
+
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+
+
+
 }
