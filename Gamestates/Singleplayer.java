@@ -20,8 +20,6 @@ public class Singleplayer extends State implements StartMethods {
     public Singleplayer(Game game) {
         super(game);
         snake = new Snake();
-
-
         loadBackground();
     }
 

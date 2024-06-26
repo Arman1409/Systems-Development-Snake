@@ -297,7 +297,7 @@ public class SnakeGamePanle extends JPanel {
 
         }
 
-
+// hierrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 
 
 

@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class Game extends JFrame implements Runnable  {
 
+    public boolean runninggame;
     private static int FPS_set = 120;
     private final int UPS_set = 10;
     private int frames = 0;
@@ -16,6 +17,9 @@ public class Game extends JFrame implements Runnable  {
 
     private Singleplayer singleplayer;
     private Menu menu;
+    private DEAD dead;
+    private EXIT exit;
+    private Local_Multiplayer local_Multiplayer;
 
     private GamePanel gamePanel;
     private GameWindow gameWindow;
@@ -34,11 +38,13 @@ public class Game extends JFrame implements Runnable  {
      */
 
     Game(){
+        runninggame = true;
         initClasses();
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
         startgameloop();
+
         //nina ist dooof 30 cm Riesen Dildo aa
 
     }
@@ -46,6 +52,9 @@ public class Game extends JFrame implements Runnable  {
     private void initClasses() {
        menu = new Menu(this);
        singleplayer = new Singleplayer(this);
+       dead = new DEAD();
+       exit = new EXIT();
+
        /*
         snakeGamePanle = new SnakeGamePanle();
         this.add(snakeGamePanle);
@@ -81,6 +90,17 @@ public class Game extends JFrame implements Runnable  {
                 // Lucas
                 break;
 
+            case DEAD:
+                dead.update();
+                break;
+
+            case EXIT:
+                exit.update();
+                break;
+
+            case LOKAL_MULTIPLAYER:
+                local_Multiplayer.update();
+                break;
             default:
                 break;
         }
@@ -100,6 +120,16 @@ public class Game extends JFrame implements Runnable  {
                 // Lucas
                 break;
 
+                case DEAD:
+                    dead.draw(g);
+                break;
+
+            case EXIT:
+                exit.draw(g);
+                break;
+            case LOKAL_MULTIPLAYER:
+                local_Multiplayer.draw(g);
+                break;
             default:
                 break;
         }

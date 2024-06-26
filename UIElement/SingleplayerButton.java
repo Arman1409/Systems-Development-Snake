@@ -11,7 +11,7 @@ public class SingleplayerButton {
     private int xOffsetCenter = 140;
     private Gamestate state;
     private BufferedImage[] imgs;
-    private final ImageLoaderabstract imageLoadersinge = new ImageLoaderabstract("/Singleplayer.png");
+    private final ImageLoaderabstract imageLoadersinge = new ImageLoaderabstract("/Buttons.png");
     private boolean mouseOver, mousePressed;
     private Rectangle bounds;
 
@@ -33,7 +33,7 @@ public class SingleplayerButton {
         imgs = new BufferedImage[3];
         BufferedImage temp = imageLoadersinge.getLoadedImage();
         for (int i = 0; i < imgs.length; i++)
-            imgs[i] = temp.getSubimage(i*110, 0, 110, 36);
+            imgs[i] = temp.getSubimage(i*1350, rowIndex*500, 1300, 500);
     }
 
     public void draw(Graphics g) {
