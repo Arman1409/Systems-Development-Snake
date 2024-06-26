@@ -17,6 +17,9 @@ public class Game extends JFrame implements Runnable  {
 
     private Singleplayer singleplayer;
     private Menu menu;
+    private DEAD dead;
+    private EXIT exit;
+    private Local_Multiplayer local_Multiplayer;
 
     private GamePanel gamePanel;
     private GameWindow gameWindow;
@@ -49,6 +52,9 @@ public class Game extends JFrame implements Runnable  {
     private void initClasses() {
        menu = new Menu(this);
        singleplayer = new Singleplayer(this);
+       dead = new DEAD();
+       exit = new EXIT();
+
        /*
         snakeGamePanle = new SnakeGamePanle();
         this.add(snakeGamePanle);
@@ -84,6 +90,17 @@ public class Game extends JFrame implements Runnable  {
                 // Lucas
                 break;
 
+            case DEAD:
+                dead.update();
+                break;
+
+            case EXIT:
+                exit.update();
+                break;
+
+            case LOKAL_MULTIPLAYER:
+                local_Multiplayer.update();
+                break;
             default:
                 break;
         }
@@ -103,6 +120,16 @@ public class Game extends JFrame implements Runnable  {
                 // Lucas
                 break;
 
+                case DEAD:
+                    dead.draw(g);
+                break;
+
+            case EXIT:
+                exit.draw(g);
+                break;
+            case LOKAL_MULTIPLAYER:
+                local_Multiplayer.draw(g);
+                break;
             default:
                 break;
         }

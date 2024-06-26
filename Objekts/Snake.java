@@ -18,16 +18,16 @@ public class Snake {
 
     private GamePanel gamePanel;
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/snake-graphics32.png");
-    private ColissionControll cc;
 
-    static final int WIDTH = 480;
-    static final int HEIGHT = 480;
+    static final int WIDTH = 1000;
+    static final int HEIGHT = 1000;
     static final int UNIT_SIZE = 40;
     static final int NUMBER_OF_UNITS = (WIDTH * HEIGHT) / (UNIT_SIZE * UNIT_SIZE);
 
     final int[][] player1 = new int[2][NUMBER_OF_UNITS];
 
     private int length = 5;
+    private ColissionControll cc;
 
     private final ArrayList<BufferedImage> snake1 = new ArrayList<BufferedImage>();
     private final BufferedImage[] snakeheadani = new BufferedImage[4];
@@ -48,8 +48,10 @@ public class Snake {
        player1[1][0] = player1[1][0] + 100;
     snake1image = imageLoader.getLoadedImage();
     snakeHeadAnimationsetup();
+    length = 5;
+    cc = new ColissionControll(WIDTH,
+            HEIGHT);
     newsnakepart();
-    cc = new ColissionControll();
     }
     public void movep1() {
         for (int i = length; i > 0; i--) {
@@ -71,7 +73,8 @@ public class Snake {
 
     public void update() {
     movep1();
-    //cc.checkHitp1();
+    cc.checkHitp1(length,
+            player1);
     }
 
     public void draw(Graphics graphics) {

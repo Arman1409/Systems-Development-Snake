@@ -3,31 +3,34 @@ package Objekts.Utilities;
 import Gamestates.Gamestate;
 import Objekts.Snake;
 
-import static java.awt.image.ImageObserver.HEIGHT;
-import static java.awt.image.ImageObserver.WIDTH;
+
 
 public class ColissionControll {
 
     private Gamestate gamestate;
     private Snake snake;
 
+    private int WIDTH;
+    private int HEIGHT;
 
-    public ColissionControll() {
 
+    public ColissionControll(int WIDTH, int HEIGHT) {
+        this.WIDTH = WIDTH;
+        this.HEIGHT = HEIGHT;
     }
 
-    public void checkHitp1() {
+    public void checkHitp1(int length, int[][] player ) {
 
 
         // check if head run into its body
-        for (int i = snake.getLength(); i > 0; i--) {
-            if (snake.getPlayer1()[0][0] == snake.getPlayer1()[0][i] && snake.getPlayer1()[1][0] == snake.getPlayer1()[1][i]) {
+        for (int i = length; i > 0; i--) {
+            if (player[0][0] == player[0][i] && player[1][0] == player[1][i]) {
                 Gamestate.state = Gamestate.DEAD;
 
-            }
+           }
         }
         // check if head run into walls
-        if (snake.getPlayer1()[0][0] < 0 || snake.getPlayer1()[0][0] > WIDTH || snake.getPlayer1()[1][0] < 0 || snake.getPlayer1()[1][0] > HEIGHT) {
+       if (player[0][0] < 0 || player[0][0] > WIDTH || player[1][0] < 0 || player[1][0] > HEIGHT) {
             Gamestate.state = Gamestate.DEAD;
 
         }
