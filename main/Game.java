@@ -52,6 +52,7 @@ public class Game extends JFrame implements Runnable  {
     private void initClasses() {
        menu = new Menu(this);
        singleplayer = new Singleplayer(this);
+       local_Multiplayer = new Local_Multiplayer(this);
        dead = new DEAD();
        exit = new EXIT();
 
