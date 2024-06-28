@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 
 public class SnakeJon {
+
     ArrayList<Point> body = new ArrayList<>();
     int speed=1; //multiplier for speed
     int direction=1;//1=left, 2=right, 3=up, 4=down

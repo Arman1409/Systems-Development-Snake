@@ -16,7 +16,7 @@ public class DEAD extends State implements StartMethods {
     private int deadX, deadY, deadWidth, deadHeight;
     private final ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Deadscreen.png");
 
-    public DEAD(Game game){
+    public DEAD(Game game) {
         super(game);
         loadBackground();
         loadButtons();

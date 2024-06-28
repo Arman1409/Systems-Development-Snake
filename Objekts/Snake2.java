@@ -19,8 +19,8 @@ public class Snake2 {
     private GamePanel gamePanel;
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/snake-graphics32.png");
 
-    static final int WIDTH = 480;
-    static final int HEIGHT = 480;
+    static final int WIDTH = 640;
+    static final int HEIGHT = 640;
     static final int UNIT_SIZE = 40;
     static final int NUMBER_OF_UNITS = (WIDTH * HEIGHT) / (UNIT_SIZE * UNIT_SIZE);
 

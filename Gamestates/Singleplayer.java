@@ -5,6 +5,7 @@ import Objekts.SnakeJon;
 import UIElement.Food;
 import imageLoader.ImageLoaderabstract;
 import main.Game;
+import main.Score;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -20,14 +21,16 @@ public class Singleplayer extends State implements StartMethods {
     private BufferedImage backgroundImg;
     private int singleX, singleY, singeWidth, singleHeight;
     private int scorep1 = 0;
+    private Score score;
 
 
     public Singleplayer(Game game) {
         super(game);
-
         snake = new Snake();
         snakeTest = new SnakeJon(new Point(100,100),1);
         loadBackground();
+        score = new Score();
+        score.readScoreFile(scorep1);
 
     }
 
