@@ -2,6 +2,9 @@ package Gamestates;
 
 import Objekts.Snake;
 import Objekts.Snake2;
+import Objekts.SnakeJon;
+import UIElement.Food;
+import UIElement.PowerUp;
 import imageLoader.ImageLoaderabstract;
 import main.Game;
 
@@ -15,11 +18,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Random;
 
 public class Multiplayer extends State implements StartMethods {
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Gamebackground_.png");
-    private Snake snake;
-    private Snake snake2;
+    private SnakeJon snake;
+    private SnakeJon snake2;
     private BufferedImage backgroundImg;
     private int singleX, singleY, singeWidth, singleHeight;
     private int scorep1 = 0;
@@ -31,9 +35,15 @@ public class Multiplayer extends State implements StartMethods {
     private BufferedReader in;
     private boolean isFirstClient;
     private Snake gamePanel;
+    private boolean darkMode=false;
+    private Food food;
+    Random rand = new Random();
+    private PowerUp pup;
 
     public Multiplayer(Game game) throws IOException {
         super(game);
+        food = new Food(rand.nextInt(20)*32, rand.nextInt(20)*32 );
+        pup= new PowerUp(new Point(rand.nextInt(20)*32, rand.nextInt(20)*32));
         startConnection();
         setID();
     }
@@ -96,9 +106,19 @@ public class Multiplayer extends State implements StartMethods {
 
     @Override
     public void draw(Graphics g) {
-        snake.draw(g);
-        snake2.draw(g);
-        //if both connected
+        if (darkMode) {
+            g.setColor(Color.black);
+            g.fillRect(0,0, singeWidth, singleHeight);
+            snake.drawHeadOnly(g);
+            snake2.drawHeadOnly(g);
+        } else {
+            g.drawImage(backgroundImg, 0, 0, singeWidth, singleHeight, null);
+
+            snake.draw(g);
+            snake2.draw(g);
+            pup.draw(g);
+            food.draw(g);
+        }
     }
 
     @Override
@@ -184,5 +204,24 @@ public class Multiplayer extends State implements StartMethods {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    public void setDarkMode(){
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                darkMode=true;
+
+                try {
+                    Thread.sleep(7000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                darkMode=false;
+            }
+        }).start();
     }
 }

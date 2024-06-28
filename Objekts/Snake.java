@@ -53,7 +53,7 @@ public class Snake {
     length = 5;
     cc = new ColissionControll(WIDTH,
             HEIGHT);
-    food = new Food(500,400,0);
+    food = new Food(500,400);
     newsnakepart();
     }
     public void movep1() {

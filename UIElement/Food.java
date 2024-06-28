@@ -16,10 +16,9 @@ public class Food {
     private Snake snake;
     private Random random;
 
-    public Food(int xPos, int yPos, int rowIndex){
+    public Food(int xPos, int yPos){
     this.xPos = xPos;
-    this.yPos = yPos;
-    this.index = rowIndex;
+    this.yPos = yPos;;
     loadfood();
 
 
@@ -29,8 +28,8 @@ public class Food {
     public void foodhit(int[][] player) {
 
         if (player[0][0] == xPos && player[1][0] == yPos) {
-            xPos = random.nextInt(1000 / 40) * 40;
-            yPos = random.nextInt(1000 / 40) * 40;
+            xPos = random.nextInt(20) * 32;
+            yPos = random.nextInt(20) * 32;
 
         }
     }
@@ -41,7 +40,7 @@ public class Food {
     }
 
     public void draw(Graphics g) {
-    g.drawImage(imgs, xPos, yPos,50,50, null);
+    g.drawImage(imgs, xPos, yPos,32,32, null);
     }
 
     public void update() {
