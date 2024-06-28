@@ -93,7 +93,7 @@ public class SnakeGamePanle extends JPanel {
         draw(graphics);
     }
 
-    public void movep1() {
+    public void move() {
         for (int i = length[0]; i > 0; i--) {
             // shift the snake one unit to the desired direction to create a move
             player1[0][i] = player1[0][i - 1];
@@ -394,7 +394,7 @@ public class SnakeGamePanle extends JPanel {
         public void updateGame(){
             if (running) {
                 movep2();
-                movep1();
+                move();
                 checkFood();
                 checkpowerup();
                 // checkHit();

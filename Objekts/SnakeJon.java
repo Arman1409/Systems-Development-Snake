@@ -122,7 +122,7 @@ public class SnakeJon {
 
     }
 
-    public void movep1(){
+    public void move(){
         for (int i = 0; i <  this.speed ; i++){
             Point newHead = new Point(body.getFirst());
             if (direction == 'L') {
@@ -140,7 +140,7 @@ public class SnakeJon {
     }
 
     public void update() {
-        movep1();
+        move();
     }
 
     public void setSpeed(int i) {
