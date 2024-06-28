@@ -1,6 +1,7 @@
 package Gamestates;
 
 import Objekts.Snake;
+import UIElement.Food;
 import imageLoader.ImageLoaderabstract;
 import main.Game;
 
@@ -11,24 +12,28 @@ import java.awt.image.BufferedImage;
 
 public class Singleplayer extends State implements StartMethods {
 
-    private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/GameBackground.png");
+    private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Gamebackground_.png");
     private Snake snake;
     private BufferedImage backgroundImg;
     private int singleX, singleY, singeWidth, singleHeight;
     private int scorep1 = 0;
 
+
     public Singleplayer(Game game) {
         super(game);
+
         snake = new Snake();
+
         loadBackground();
+
     }
 
 
 
     private void loadBackground() {
         backgroundImg = imageLoader.getLoadedImage();
-        singeWidth = (int) (backgroundImg.getWidth() * Game.SCALE);
-        singleHeight = (int) (backgroundImg.getHeight() * Game.SCALE);
+        singeWidth = (int) (backgroundImg.getWidth() * Game.SCALE)*2;
+        singleHeight = (int) (backgroundImg.getHeight() * Game.SCALE)*2;
         singleX = Game.GAME_WIDTH / 2 - singeWidth / 2;
         singleY = (int) (45 * Game.SCALE);
 

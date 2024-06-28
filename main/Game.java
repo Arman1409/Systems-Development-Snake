@@ -5,6 +5,7 @@ import Gamestates.Menu;
 
 import javax.swing.JFrame;
 import java.awt.*;
+import java.io.IOException;
 
 public class Game extends JFrame implements Runnable  {
 
@@ -20,6 +21,7 @@ public class Game extends JFrame implements Runnable  {
     private DEAD dead;
     private EXIT exit;
     private Local_Multiplayer local_Multiplayer;
+    private Multiplayer multiplayer;
 
     private GamePanel gamePanel;
     private GameWindow gameWindow;
@@ -52,8 +54,14 @@ public class Game extends JFrame implements Runnable  {
     private void initClasses() {
        menu = new Menu(this);
        singleplayer = new Singleplayer(this);
+       local_Multiplayer = new Local_Multiplayer(this);
        dead = new DEAD();
        exit = new EXIT();
+        try {
+            multiplayer = new Multiplayer(this);
+        } catch (IOException e) {
+           System.out.println("IOException in Multiplayer");
+        }
 
        /*
         snakeGamePanle = new SnakeGamePanle();
@@ -87,7 +95,7 @@ public class Game extends JFrame implements Runnable  {
             break;
 
             case MULTIPLAYER:
-                // Lucas
+                multiplayer.update();
                 break;
 
             case DEAD:
@@ -117,7 +125,7 @@ public class Game extends JFrame implements Runnable  {
                 break;
 
             case MULTIPLAYER:
-                // Lucas
+                multiplayer.draw(g);
                 break;
 
                 case DEAD:

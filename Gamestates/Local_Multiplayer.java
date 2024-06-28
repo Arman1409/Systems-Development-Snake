@@ -1,10 +1,20 @@
 package Gamestates;
 
+import main.Game;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class Local_Multiplayer implements StartMethods{
+public class Local_Multiplayer extends State implements StartMethods{
+
+    public Local_Multiplayer(Game game){
+        super(game);
+
+
+    }
+
+
     @Override
     public void update() {
 
