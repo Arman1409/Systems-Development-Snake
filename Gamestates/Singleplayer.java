@@ -1,6 +1,7 @@
 package Gamestates;
 
 import Objekts.Snake;
+import Objekts.SnakeJon;
 import UIElement.Food;
 import imageLoader.ImageLoaderabstract;
 import main.Game;
@@ -8,12 +9,14 @@ import main.Game;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
 public class Singleplayer extends State implements StartMethods {
 
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Gamebackground_.png");
     private Snake snake;
+    private SnakeJon snakeTest;
     private BufferedImage backgroundImg;
     private int singleX, singleY, singeWidth, singleHeight;
     private int scorep1 = 0;
@@ -23,7 +26,7 @@ public class Singleplayer extends State implements StartMethods {
         super(game);
 
         snake = new Snake();
-
+        snakeTest = new SnakeJon(new Point(100,100),1);
         loadBackground();
 
     }
@@ -44,7 +47,7 @@ public class Singleplayer extends State implements StartMethods {
     @Override
     public void update() {
     snake.update();
-
+    snakeTest.update();
     }
 
     @Override
@@ -52,6 +55,7 @@ public class Singleplayer extends State implements StartMethods {
         g.drawImage(backgroundImg, 0, 0,singeWidth,singleHeight, null);
 
         snake.draw(g);
+        snakeTest.draw(g);
     }
 
     @Override
@@ -80,21 +84,25 @@ public class Singleplayer extends State implements StartMethods {
             case KeyEvent.VK_LEFT:
                 if (snake.getDirection() != 'R') {
                     snake.setDirection('L');
+                    snakeTest.setDirection('L');
                 }
                 break;
             case KeyEvent.VK_RIGHT:
                 if (snake.getDirection() != 'L') {
                     snake.setDirection('R');
+                    snakeTest.setDirection('R');
                 }
                 break;
             case KeyEvent.VK_UP:
                 if (snake.getDirection() != 'D') {
                     snake.setDirection('U');
+                    snakeTest.setDirection('U');
                 }
                 break;
             case KeyEvent.VK_DOWN:
                 if (snake.getDirection() != 'U') {
                     snake.setDirection('D');
+                    snakeTest.setDirection('D');
                 }
                 break;
         }
