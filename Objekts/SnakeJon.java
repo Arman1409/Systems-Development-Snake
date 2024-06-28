@@ -1,5 +1,7 @@
 package Objekts;
 
+import Objekts.Utilities.ColissionControll;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -9,6 +11,10 @@ import javax.imageio.ImageIO;
 
 
 public class SnakeJon {
+    static final int WIDTH = 640;
+    static final int HEIGHT = 640;
+    static final int UNIT_SIZE = 32;
+    static final int NUMBER_OF_UNITS = (WIDTH * HEIGHT) / (UNIT_SIZE * UNIT_SIZE);
 
     ArrayList<Point> body = new ArrayList<>();
     int speed=1; //multiplier for speed
@@ -16,7 +22,10 @@ public class SnakeJon {
     int unitsize=32;
     BufferedImage[] tiles =new BufferedImage[20];
 
+    private ColissionControll cc;
+
     public SnakeJon(Point p,int dir) {
+        cc = new ColissionControll(WIDTH,HEIGHT);
         this.body.add(p);
         this.body.add(p);
         this.body.add(p);
@@ -142,6 +151,7 @@ public class SnakeJon {
 
     public void update() {
         move();
+        cc.checkHitp1(body);
     }
 
     public void setSpeed(int i) {
@@ -150,5 +160,9 @@ public class SnakeJon {
 
     public void setDirection(char direction) {
         this.direction = direction;
+    }
+
+    public int getDirection() {
+        return direction;
     }
 }

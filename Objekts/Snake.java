@@ -83,8 +83,6 @@ public class Snake {
 
     public void update() {
     movep1();
-    cc.checkHitp1(length,
-            player1);
 
     if(food.foodhit(hitbox)){
         newsnakepart();

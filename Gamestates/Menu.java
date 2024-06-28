@@ -52,7 +52,7 @@ public class Menu extends State implements StartMethods {
     @Override
     public void draw(Graphics g) {
 
-        g.drawImage(backgroundImg, 0, 0,menuWidth-60,menuHeight-60, null);
+        g.drawImage(backgroundImg, 0, 0,640,640, null);
 
         for (SingleplayerButton mb : buttons)
             mb.draw(g);
