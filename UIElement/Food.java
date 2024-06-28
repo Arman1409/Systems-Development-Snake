@@ -5,6 +5,7 @@ import Objekts.Snake;
 import imageLoader.ImageLoaderabstract;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -15,24 +16,31 @@ public class Food {
     private Gamestate gamestate;
     private Snake snake;
     private Random random;
+    private Rectangle2D.Float hitbox;
 
     public Food(int xPos, int yPos, int rowIndex){
+    random = new Random();
     this.xPos = xPos;
     this.yPos = yPos;
     this.index = rowIndex;
     loadfood();
-
+    hitbox = new Rectangle2D.Float(xPos, yPos, 32, 32);
 
 
     }
 
-    public void foodhit(int[][] player) {
 
-        if (player[0][0] == xPos && player[1][0] == yPos) {
+
+    public boolean foodhit(Rectangle2D.Float hitboxplayer) {
+
+        if (hitbox.intersects(hitboxplayer)) {
             xPos = random.nextInt(1000 / 40) * 40;
             yPos = random.nextInt(1000 / 40) * 40;
-
+            hitbox.x = xPos;
+            hitbox.y = yPos;
+            return true;
         }
+    return false;
     }
 
     public void loadfood(){

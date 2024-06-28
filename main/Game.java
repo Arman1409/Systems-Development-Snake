@@ -14,6 +14,7 @@ public class Game extends JFrame implements Runnable  {
     private final int UPS_set = 10;
     private int frames = 0;
     private Thread gameThread;
+    private Thread serverThrea;
   //  private SnakeGamePanle snakeGamePanle;
 
     private Singleplayer singleplayer;
@@ -55,12 +56,12 @@ public class Game extends JFrame implements Runnable  {
        menu = new Menu(this);
        singleplayer = new Singleplayer(this);
        local_Multiplayer = new Local_Multiplayer(this);
-       dead = new DEAD();
+       dead = new DEAD(this);
        exit = new EXIT();
         try {
             multiplayer = new Multiplayer(this);
         } catch (IOException e) {
-           System.out.println("IOException in Multiplayer");
+           System.out.println(e.getMessage());
         }
 
        /*
@@ -74,6 +75,12 @@ public class Game extends JFrame implements Runnable  {
         this.setLocationRelativeTo(null);
     */
     }
+
+    private void startserver (){
+        serverThrea = new Thread(this);
+        serverThrea.start();
+    }
+
 
 
     private void startgameloop(){

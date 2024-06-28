@@ -10,6 +10,7 @@ import main.GamePanel;
 //import main.SnakeGamePanle;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class Snake {
     private int length = 5;
     private ColissionControll cc;
     private Food food;
+    private Rectangle2D.Float hitbox;
 
     private final ArrayList<BufferedImage> snake1 = new ArrayList<BufferedImage>();
     private final BufferedImage[] snakeheadani = new BufferedImage[4];
@@ -55,6 +57,9 @@ public class Snake {
             HEIGHT);
     food = new Food(500,400,0);
     newsnakepart();
+    hitbox = new Rectangle2D.Float(player1[0][0],player1[1][0],32,32);
+
+
     }
     public void movep1() {
         for (int i = length; i > 0; i--) {
@@ -72,13 +77,19 @@ public class Snake {
             player1[1][0] = player1[1][0] + UNIT_SIZE;
         }
 
+        hitbox.x = player1[0][0];
+        hitbox.y = player1[1][0];
     }
 
     public void update() {
     movep1();
     cc.checkHitp1(length,
             player1);
-    food.foodhit(player1);
+
+    if(food.foodhit(hitbox)){
+        newsnakepart();
+        length++;
+    }
 
 
     }
