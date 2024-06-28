@@ -26,7 +26,7 @@ public class SingleplayerButton {
     }
 
     private void initBounds() {
-        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 140, 56);
+        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 200, 100);
 
     }
     private void loadImgs() {
