@@ -31,7 +31,7 @@ public class Singleplayer extends State implements StartMethods {
 
     public Singleplayer(Game game) {
         super(game);
-       // snake = new Snake();
+
         snakeTest = new SnakeJon(new Point(100,100),'R',"snake-graphics32.png");
         food = new Food(rand.nextInt(20)*32, rand.nextInt(20)*32 );
         pup= new PowerUp(new Point(rand.nextInt(20)*32, rand.nextInt(20)*32));

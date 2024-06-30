@@ -25,11 +25,9 @@ public class SnakeJon {
     private String res;
 
     private Rectangle2D.Float Hitbox;
-    private ColissionControll cc;
 
     public SnakeJon(Point p,char dir,String res) {
         this.res=res;
-        cc = new ColissionControll(WIDTH,HEIGHT);
         this.direction=dir;
         this.body.add(p);
         this.body.add(p);
@@ -167,7 +165,6 @@ public class SnakeJon {
 
     public void update() {
         move();
-        cc.checkHitp1(body);
     }
 
     public void setSpeed(int i) {
