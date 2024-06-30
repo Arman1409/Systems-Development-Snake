@@ -10,6 +10,15 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
+/**
+ * The SnakeJon class represents a snake in the game.
+ * <p>
+ * This class manages the snake's body, speed, direction, and hitbox. It also handles the snake's movement and drawing.
+ * </p>
+ *
+ * @author Dennis Sydow, Lucas Fabricius, Jonathan Heiher
+ */
+
 
 public class SnakeJon {
     static final int WIDTH = 640;
@@ -28,6 +37,15 @@ public class SnakeJon {
 
     private Rectangle2D.Float Hitbox;
 
+    /**
+     * This constructor initializes a new instance of the SnakeJon class.
+     * It sets the initial body, direction, and resource for the snake.
+     *
+     * @param p This is the initial point for the snake's body.
+     * @param dir This is the initial direction for the snake.
+     * @param res This is the resource for the snake's image.
+     */
+
     public SnakeJon(Point p,char dir,String res) {
         this.res=res;
         this.direction=dir;
@@ -41,11 +59,20 @@ public class SnakeJon {
         this.initializeTiles();
         Hitbox = new Rectangle2D.Float(body.get(0).x,body.get(0).y,unitsize,unitsize);
     }
+
+    /**
+     * This method halves the snake's body.
+     */
+
     public void halfBody(){
         for(int i = 0;i<body.size()/2;i++ ){
             body.removeLast();
         }
     }
+
+    /**
+     * This method initializes the tiles for the snake's image.
+     */
 
     private void initializeTiles() {
         BufferedImage  image;
@@ -80,6 +107,13 @@ public class SnakeJon {
             }
         }
     }
+
+    /**
+     * This method gets the correct tile number for the snake's body position.
+     *
+     * @param bodypos This is the body position for the snake.
+     * @return int This returns the correct tile number.
+     */
 
     private int getCorrectTileNumber(int bodypos){
 
@@ -132,6 +166,12 @@ public class SnakeJon {
         return 0;
     }
 
+    /**
+     * This method draws the snake's body.
+     *
+     * @param g This is the graphics instance to draw the snake.
+     */
+
     public void draw(Graphics g) {
 
         for (int a = 0; a < body.size(); a++) {
@@ -139,11 +179,20 @@ public class SnakeJon {
         }
     }
 
+    /**
+     * This method draws the snake's head only.
+     *
+     * @param g This is the graphics instance to draw the snake's head.
+     */
+
     public void drawHeadOnly(Graphics g) {
         g.drawImage(tiles[getCorrectTileNumber(0)],body.getFirst().getLocation().x, body.getFirst().getLocation().y, null);
 
 
     }
+    /**
+     * This method moves the snake.
+     */
 
 
     public void move(){
@@ -165,9 +214,18 @@ public class SnakeJon {
         }
     }
 
+    /**
+     * This method updates the snake's movement.
+     */
+
     public void update() {
         move();
     }
+    /**
+     * This method sets the snake's speed.
+     *
+     * @param i This is the new speed for the snake.
+     */
 
     public void setSpeed(double i) {
         new Thread(new Runnable()

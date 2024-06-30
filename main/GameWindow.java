@@ -6,6 +6,15 @@ import java.awt.event.WindowFocusListener;
 
 import javax.swing.JFrame;
 
+/**
+ * The GameWindow class is responsible for creating the main game window.
+ * <p>
+ * This class creates a JFrame, sets its properties, and adds a GamePanel to it.
+ * </p>
+ *
+ * @author Jan-Hendrik Heise, Nina Brandt
+ */
+
     public class GameWindow {
         private JFrame jframe;
 

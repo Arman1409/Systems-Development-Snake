@@ -17,6 +17,16 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Random;
 
+/**
+ * The Multiplayer class represents the state of the game when the game is in multiplayer mode.
+ * <p>
+ * This class is responsible for updating and drawing the multiplayer state of the game.
+ * It also handles mouse and key events in this state.
+ * </p>
+ *
+ * @author
+ */
+
 public class Multiplayer extends State implements StartMethods {
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/WIP.jpeg");
 
@@ -37,6 +47,12 @@ public class Multiplayer extends State implements StartMethods {
     private SnakeJon snake;
     private SnakeJon snake2;
 
+    /**
+     * This constructor initializes a new instance of the Multiplayer class.
+     *
+     * @param game This is the game instance.
+     */
+
     public Multiplayer(Game game) throws IOException {
         super(game);
         loadBackground();
@@ -47,6 +63,11 @@ public class Multiplayer extends State implements StartMethods {
         //startConnection();
         //setID();
     }
+
+    /**
+     * This method is used to load the background image.
+     */
+
     private void loadBackground() {
         backgroundImg = imageLoader.getLoadedImage();
         singeWidth = (int) (backgroundImg.getWidth() * Game.SCALE);
@@ -118,6 +139,10 @@ public class Multiplayer extends State implements StartMethods {
             }
         }
     }
+
+    /**
+     * This method is used to update the multiplayer state.
+     */
 
     @Override
     public void update() {

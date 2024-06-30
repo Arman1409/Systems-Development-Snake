@@ -14,6 +14,16 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * The Singleplayer class represents the state of the game when the game is in single player mode.
+ * <p>
+ * This class is responsible for updating and drawing the single player state of the game.
+ * It also handles mouse and key events in this state.
+ * </p>
+ *
+ * @author
+ */
+
 public class Singleplayer extends State implements StartMethods {
 
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Gamebackground_.png");
@@ -29,6 +39,12 @@ public class Singleplayer extends State implements StartMethods {
     private boolean darkMode=false;
     private ColissionControll cc;
 
+    /**
+     * This constructor initializes a new instance of the Singleplayer class.
+     *
+     * @param game This is the game instance.
+     */
+
 
     public Singleplayer(Game game) {
         super(game);
@@ -43,6 +59,10 @@ public class Singleplayer extends State implements StartMethods {
 
     }
 
+    /**
+     * This method is used to load the background image.
+     */
+
 
 
     private void loadBackground() {
@@ -53,6 +73,10 @@ public class Singleplayer extends State implements StartMethods {
         singleY = (int) (45 * Game.SCALE);
 
     }
+
+    /**
+     * This method is used to update the single player state.
+     */
 
 
 
@@ -65,6 +89,12 @@ public class Singleplayer extends State implements StartMethods {
 
 
     }
+
+    /**
+     * This method is used to set the dark mode.
+     */
+
+
     public void setDarkMode(){
         new Thread(new Runnable()
         {
@@ -83,6 +113,12 @@ public class Singleplayer extends State implements StartMethods {
             }
         }).start();
     }
+
+    /**
+     * This method is triggered when the mouse is clicked.
+     *
+     * @param e This is the mouse event object.
+     */
 
     @Override
     public void draw(Graphics g) {
@@ -105,20 +141,44 @@ public class Singleplayer extends State implements StartMethods {
 
     }
 
+    /**
+     * This method is triggered when the mouse is pressed.
+     *
+     * @param e This is the mouse event object.
+     */
+
     @Override
     public void mousePressed(MouseEvent e) {
 
     }
+
+    /**
+     * This method is triggered when the mouse is released.
+     *
+     * @param e This is the mouse event object.
+     */
 
     @Override
     public void mouseReleased(MouseEvent e) {
 
     }
 
+    /**
+     * This method is triggered when the mouse is moved.
+     *
+     * @param e This is the mouse event object.
+     */
+
     @Override
     public void mouseMoved(MouseEvent e) {
 
     }
+
+    /**
+     * This method is triggered when a key is pressed.
+     *
+     * @param e This is the key event object.
+     */
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -145,11 +205,22 @@ public class Singleplayer extends State implements StartMethods {
                 break;
         }
     }
+    /**
+     * This method is triggered when a key is released.
+     *
+     * @param e This is the key event object.
+     */
 
     @Override
     public void keyReleased(KeyEvent e) {
 
     }
+
+    /**
+     * This method is triggered when the mouse is dragged.
+     *
+     * @param e This is the mouse event object.
+     */
 
     public void mouseDragged(MouseEvent e) {
     }

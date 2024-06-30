@@ -9,16 +9,38 @@ import java.util.ArrayList;
 
 public class ColissionControll {
 
+    /**
+     * The ColissionControll class is responsible for managing the collision control in the game.
+     * <p>
+     * This class checks if the player's head runs into its body or the walls.
+     * </p>
+     *
+     * @author
+     */
+
     private Gamestate gamestate;
 
     private int WIDTH;
     private int HEIGHT;
 
+    /**
+     * This constructor initializes a new instance of the ColissionControll class.
+     * It sets the width and height for the collision control.
+     *
+     * @param WIDTH This is the width for the collision control.
+     * @param HEIGHT This is the height for the collision control.
+     */
 
     public ColissionControll(int WIDTH, int HEIGHT) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
     }
+
+    /**
+     * This method checks if the player's head runs into its body or the walls.
+     *
+     * @param player This is the player instance.
+     */
 
     public void checkHitp1(ArrayList<Point> player) {
 
@@ -39,7 +61,14 @@ public class ColissionControll {
     }
 
 
-
+    /**
+     * This method checks if the player's head runs into its body, the walls, or other players.
+     *
+     * @param player1 This is the first player instance.
+     * @param player2 This is the second player instance.
+     * @param p1 This is the first SnakeJon instance.
+     * @param p2 This is the second SnakeJon instance.
+     */
 
 
     public void checkHitp2(ArrayList<Point> player1 , ArrayList<Point> player2, SnakeJon p1 , SnakeJon p2) {

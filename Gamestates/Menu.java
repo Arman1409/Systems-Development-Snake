@@ -149,6 +149,13 @@ public class Menu extends State implements StartMethods {
             mb.resetBools();
 
     }
+
+    /**
+     * This method is triggered when the mouse is moved.
+     *
+     * @param e This is the mouse event object.
+     */
+
     @Override
     public void mouseMoved(MouseEvent e) {
         for (SingleplayerButton mb : buttons)
@@ -161,15 +168,31 @@ public class Menu extends State implements StartMethods {
             }
     }
 
+    /**
+     * This method is triggered when a key is pressed.
+     *
+     * @param e This is the key event object.
+     */
+
     @Override
     public void keyPressed(KeyEvent e) {
 
     }
 
+    /**
+     * This method is triggered when a key is released.
+     *
+     * @param e This is the key event object.
+     */
+
     @Override
     public void keyReleased(KeyEvent e) {
 
     }
+
+    /**
+     * This method is used to check if a button is pressed.
+     */
 
     private void checkifpressed() {
         if (buttons[0].isMousePressed()) {
