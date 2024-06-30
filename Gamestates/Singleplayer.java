@@ -1,6 +1,5 @@
 package Gamestates;
 
-import Objekts.Snake;
 import Objekts.SnakeJon;
 import Objekts.Utilities.ColissionControll;
 import UIElement.Food;
@@ -12,14 +11,13 @@ import main.Score;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Singleplayer extends State implements StartMethods {
 
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Gamebackground_.png");
-    private Snake snake;
+
     private SnakeJon snakeTest;
     private BufferedImage backgroundImg;
     private int singleX, singleY, singeWidth, singleHeight;
@@ -35,7 +33,7 @@ public class Singleplayer extends State implements StartMethods {
     public Singleplayer(Game game) {
         super(game);
 
-        snakeTest = new SnakeJon(new Point(100,100),'R',"snake-graphics32.png");
+        snakeTest = new SnakeJon(new Point(320,192),'R',"snake-graphics32.png");
         food = new Food(rand.nextInt(20)*32, rand.nextInt(20)*32 );
         pup= new PowerUp(new Point(rand.nextInt(20)*32, rand.nextInt(20)*32));
         loadBackground();
@@ -45,6 +43,15 @@ public class Singleplayer extends State implements StartMethods {
 
     }
 
+    public void reset(){
+        snakeTest = new SnakeJon(new Point(320,192),'R',"snake-graphics32.png");
+        food = new Food(rand.nextInt(20)*32, rand.nextInt(20)*32 );
+        pup= new PowerUp(new Point(rand.nextInt(20)*32, rand.nextInt(20)*32));
+        loadBackground();
+        cc = new ColissionControll(640,640);
+        score = new Score();
+        score.readScoreFile(scorep1);
+    }
 
 
     private void loadBackground() {

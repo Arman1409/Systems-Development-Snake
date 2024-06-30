@@ -205,4 +205,7 @@ public class SnakeJon {
     public Rectangle2D.Float getHitbox() {
         return Hitbox;
     }
+    public boolean isHit(Point p) {
+        return body.contains(p);
+    }
 }

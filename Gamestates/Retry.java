@@ -1,22 +1,22 @@
 package Gamestates;
 
+import com.sun.tools.javac.Main;
+import main.*;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class EXIT  implements StartMethods{
-
-
-
-    public EXIT(){
-
+public class Retry extends State implements StartMethods{
+    public Retry(Game game) {
+        super(game);
     }
-
-
 
     @Override
     public void update() {
-        System.exit(0);
+
+
+
     }
 
     @Override

@@ -33,8 +33,8 @@ public class DEAD extends State implements StartMethods {
 
     }
     private void loadButtons() {
-        buttons[0] = new DeadButtons((Game.GAME_WIDTH / 2) - 50, (int) (400 * Game.SCALE), 0,Gamestate.EXIT);
-        buttons[1] = new DeadButtons((Game.GAME_WIDTH / 2) + 150, (int) (400 * Game.SCALE), 1,Gamestate.EXIT);
+        buttons[0] = new DeadButtons((Game.GAME_WIDTH / 2) - 50, (int) (400 * Game.SCALE), 0);
+        buttons[1] = new DeadButtons((Game.GAME_WIDTH / 2) + 150, (int) (400 * Game.SCALE), 1);
 
     }
 
@@ -66,7 +66,9 @@ public class DEAD extends State implements StartMethods {
     public void mousePressed(MouseEvent e) {
         for(DeadButtons db : buttons){
             if(isIn(e,db)){
+                game.gcmaker();
                 db.setMousePressed(true);
+
                 break;
             }
         }
@@ -77,7 +79,9 @@ public class DEAD extends State implements StartMethods {
         for(DeadButtons db : buttons){
             if(isIn(e,db)){
                 if (db.isMousePressed());
+
                 db.applyGamestate();
+
                 break;
             }
         }

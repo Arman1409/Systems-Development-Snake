@@ -1,7 +1,5 @@
 package Gamestates;
 
-import Objekts.Snake;
-import Objekts.Snake2;
 import Objekts.SnakeJon;
 import UIElement.Food;
 import UIElement.PowerUp;
@@ -9,7 +7,6 @@ import imageLoader.ImageLoaderabstract;
 import main.Game;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -21,9 +18,8 @@ import java.net.Socket;
 import java.util.Random;
 
 public class Multiplayer extends State implements StartMethods {
-    private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Gamebackground_.png");
-    private Snake snake;
-    private Snake snake2;
+    private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/WIP.jpeg");
+
     private BufferedImage backgroundImg;
     private int singleX, singleY, singeWidth, singleHeight;
     private int scorep1 = 0;
@@ -34,24 +30,31 @@ public class Multiplayer extends State implements StartMethods {
     private PrintWriter out;
     private BufferedReader in;
     private boolean isFirstClient;
-    private Snake gamePanel;
     private boolean darkMode = false;
     private Food food;
     Random rand = new Random();
     private PowerUp pup;
-    private SnakeJon snakeJon;
-    private SnakeJon snakeJon2;
+    private SnakeJon snake;
+    private SnakeJon snake2;
 
     public Multiplayer(Game game) throws IOException {
         super(game);
-        food = new Food(rand.nextInt(20) * 32, rand.nextInt(20) * 32);
-        pup = new PowerUp(new Point(rand.nextInt(20) * 32, rand.nextInt(20) * 32));
-        snakeJon = new SnakeJon(new Point(100,100),'R',"snake-graphics32.png");
-        snakeJon2 = new SnakeJon(new Point(100,100),'R',"snake2-graphics32.png");
-        startConnection();
-        setID();
+        loadBackground();
+      //  food = new Food(rand.nextInt(20) * 32, rand.nextInt(20) * 32);
+      //  pup = new PowerUp(new Point(rand.nextInt(20) * 32, rand.nextInt(20) * 32));
+      //  snake= new SnakeJon(new Point(100,100),'R',"snake-graphics32.png");
+      //  snake2 = new SnakeJon(new Point(100,100),'R',"snake2-graphics32.png");
+        //startConnection();
+        //setID();
     }
+    private void loadBackground() {
+        backgroundImg = imageLoader.getLoadedImage();
+        singeWidth = (int) (backgroundImg.getWidth() * Game.SCALE);
+        singleHeight = (int) (backgroundImg.getHeight() * Game.SCALE);
+        singleX = Game.GAME_WIDTH / 2 - singeWidth / 2;
+        singleY = (int) (45 * Game.SCALE);
 
+    }
     public void startConnection() throws IOException {
         socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
         out = new PrintWriter(socket.getOutputStream(), true);
@@ -100,30 +103,39 @@ public class Multiplayer extends State implements StartMethods {
 
     @Override
     public void update() {
+      /*
         try {
             getDirection2();
         } catch (IOException e) {
             System.out.println("IO Exception");
         }
         //if both connected
+
+       */
     }
 
     @Override
     public void draw(Graphics g) {
+
+    g.drawImage(backgroundImg, 0, 0,640,640, null);
+
+       /*
         if (darkMode) {
             g.setColor(Color.black);
             g.fillRect(0, 0, singeWidth, singleHeight);
-            snakeJon.drawHeadOnly(g);
-            snakeJon2.drawHeadOnly(g);
+            snake.drawHeadOnly(g);
+            snake2.drawHeadOnly(g);
         } else {
             g.drawImage(backgroundImg, 0, 0, singeWidth, singleHeight, null);
 
-            snakeJon2.draw(g);
-            snakeJon2.draw(g);
+            snake.draw(g);
+            snake2.draw(g);
             pup.draw(g);
             food.draw(g);
         }
         //if both connected
+
+        */
     }
 
     @Override
@@ -147,7 +159,9 @@ public class Multiplayer extends State implements StartMethods {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {//looks for which snake is played and translates the arrowkey presses
+    public void keyPressed(KeyEvent e) {
+        /*
+        //looks for which snake is played and translates the arrowkey presses
         if (getIsFirstClient() == true) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
@@ -162,7 +176,7 @@ public class Multiplayer extends State implements StartMethods {
                     }
                 case KeyEvent.VK_UP:
                     if (snake.getDirection() != 'D') {
-                        gamePanel.setDirection('U');
+                        snake.setDirection('U');
                         out.println('U');
                     }
                 case KeyEvent.VK_DOWN:
@@ -202,9 +216,11 @@ public class Multiplayer extends State implements StartMethods {
 
             }
 
+         */
+
 
         }
-    }
+
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -212,6 +228,7 @@ public class Multiplayer extends State implements StartMethods {
     }
 
     public void setDarkMode() {
+    /*
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -225,6 +242,10 @@ public class Multiplayer extends State implements StartMethods {
 
                 darkMode = false;
             }
-        }).start();
+
+     
+        }
+
+     */
     }
 }

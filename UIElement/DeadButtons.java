@@ -15,11 +15,11 @@ public class DeadButtons {
     private boolean mouseOver, mousePressed;
     private Rectangle bounds;
 
-    public DeadButtons(int x, int y, int rowIndex,Gamestate state) {
+    public DeadButtons(int x, int y, int rowIndex) {
         this.xPos = x;
         this.yPos = y;
         this.rowIndex = rowIndex;
-        this.state = state;
+
         initBounds();
        loadImgs();
 

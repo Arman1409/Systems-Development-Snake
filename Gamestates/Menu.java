@@ -23,6 +23,11 @@ public class Menu extends State implements StartMethods {
 
 
     }
+    public void reset(){
+        loadBackground();
+        loadButtons();
+    }
+
     private void loadBackground() {
         backgroundImg = imageLoader.getLoadedImage();
         menuWidth = (int) (backgroundImg.getWidth() * Game.SCALE);

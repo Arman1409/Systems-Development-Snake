@@ -1,6 +1,5 @@
 package Gamestates;
 
-import Objekts.Snake;
 import Objekts.SnakeJon;
 import Objekts.Utilities.ColissionControll;
 import UIElement.Food;
@@ -17,7 +16,6 @@ import java.util.Random;
 
 public class Local_Multiplayer extends State implements StartMethods{
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Gamebackground_.png");
-    private Snake snake;
     private SnakeJon snake1;
     private SnakeJon snake2;
     private BufferedImage backgroundImg;
@@ -32,8 +30,8 @@ public class Local_Multiplayer extends State implements StartMethods{
 
     public Local_Multiplayer(Game game){
         super(game);
-        snake1 = new SnakeJon(new Point(100,100),'R',"snake-graphics32.png");
-        snake2 = new SnakeJon(new Point(300,400),'L',"snake2-graphics32.png");
+        snake1 = new SnakeJon(new Point(320,192),'R',"snake-graphics32.png");
+        snake2 = new SnakeJon(new Point(320,384),'L',"snake2-graphics32.png");
         food = new Food(rand.nextInt(20)*32, rand.nextInt(20)*32 );
         pup= new PowerUp(new Point(rand.nextInt(20)*32, rand.nextInt(20)*32));
         loadBackground();
@@ -57,7 +55,10 @@ public class Local_Multiplayer extends State implements StartMethods{
         snake1.update();
         snake2.update();
        food.foodhit(snake1.getHitbox(), snake1);
-       cc.checkHitp2(snake1.getBody(),snake2.getBody());
+       food.foodhit(snake2.getHitbox(), snake2);
+       pup.onHitMP(snake1.getHitbox(),snake1,snake2,this);
+       pup.onHitMP(snake2.getHitbox(),snake2,snake1,this);
+       cc.checkHitp2(snake1.getBody(),snake2.getBody(),snake1,snake2);
 
     }
     public void setDarkMode(){

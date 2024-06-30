@@ -1,7 +1,7 @@
 package Objekts.Utilities;
 
 import Gamestates.Gamestate;
-import Objekts.Snake;
+import Objekts.SnakeJon;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class ColissionControll {
 
     private Gamestate gamestate;
-    private Snake snake;
 
     private int WIDTH;
     private int HEIGHT;
@@ -43,7 +42,7 @@ public class ColissionControll {
 
 
 
-    public void checkHitp2(ArrayList<Point> player1 ,ArrayList<Point> player2) {
+    public void checkHitp2(ArrayList<Point> player1 , ArrayList<Point> player2, SnakeJon p1 , SnakeJon p2) {
         // check if head run into its body
         for (int i = player1.size()-1; i > 0; i--) {
             if (player1.get(0).x == player1.get(i).x && player1.get(0).y == player1.get(i).y) {
@@ -62,6 +61,8 @@ public class ColissionControll {
         Gamestate.state = Gamestate.DEAD;
         }
 
+
+        // Collision with other Players
         int size = 0;
         if (player1.size()>= player2.size()) {
             size = player2.size()-1;
@@ -69,12 +70,12 @@ public class ColissionControll {
             size = player1.size()-1;
         }
         for (int i = size; i > 0; i--) {
-         if(player1.getFirst().x == player2.get(i).x && player1.getFirst().y == player2.get(i).y) {
-             Gamestate.state = Gamestate.DEAD;
-             System.out.println("P1 lost");
-         }else if (player2.getFirst().x == player1.get(i).x && player2.getFirst().y == player1.get(i).y) {
+         if(p1.isHit(player2.getFirst().getLocation())) {
              Gamestate.state = Gamestate.DEAD;
              System.out.println("P2 lost");
+         }else if (p2.isHit(player1.getFirst().getLocation())){
+             Gamestate.state = Gamestate.DEAD;
+             System.out.println("P1 lost");
          }
 
         }
