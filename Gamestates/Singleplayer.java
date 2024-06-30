@@ -57,6 +57,7 @@ public class Singleplayer extends State implements StartMethods {
     @Override
     public void update() {
         snakeTest.update();
+        food.foodhit(snakeTest.getHitbox(),snakeTest);
 
     }
     public void setDarkMode(){

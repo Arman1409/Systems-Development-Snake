@@ -215,4 +215,8 @@ public class Game extends JFrame implements Runnable  {
     public EXIT getExit() {
         return exit;
     }
+
+    public Local_Multiplayer getLocal_Multiplayer() {
+        return local_Multiplayer;
+    }
 }

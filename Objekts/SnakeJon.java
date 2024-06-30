@@ -3,6 +3,7 @@ package Objekts;
 import Objekts.Utilities.ColissionControll;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +23,7 @@ public class SnakeJon {
     int unitsize=32;
     BufferedImage[] tiles =new BufferedImage[20];
 
+    private Rectangle2D.Float Hitbox;
     private ColissionControll cc;
 
     public SnakeJon(Point p,char dir) {
@@ -35,6 +37,7 @@ public class SnakeJon {
         this.body.add(p);
         this.direction=dir;
         this.initializeTiles();
+        Hitbox = new Rectangle2D.Float(body.get(0).x,body.get(0).y,unitsize,unitsize);
     }
     public void halfBody(){
         for(int i = 0;i<body.size()/2;i++ ){
@@ -155,6 +158,8 @@ public class SnakeJon {
             }
             body.add(0, newHead);
             body.removeLast();
+            Hitbox.x = body.get(0).x;
+            Hitbox.y = body.get(0).y;
         }
     }
 
@@ -182,11 +187,23 @@ public class SnakeJon {
         }).start();
     }
 
+    public void addpart(){
+        body.add(2,getBody().get(1).getLocation());
+    }
+
     public void setDirection(char direction) {
         this.direction = direction;
     }
 
     public int getDirection() {
         return direction;
+    }
+
+    public ArrayList<Point> getBody() {
+        return body;
+    }
+
+    public Rectangle2D.Float getHitbox() {
+        return Hitbox;
     }
 }
