@@ -12,21 +12,45 @@ import java.util.Random;
 public class PowerUp {
     Point loc;
     private BufferedImage imgs;
-    private final ImageLoaderabstract imageLoadersinge = new ImageLoaderabstract("/snake-graphics32.png");
+    private final ImageLoaderabstract imageLoadersinge = new ImageLoaderabstract("/Powerups.PNG");
+
+    Random rand = new Random();
+    int n =rand.nextInt(4);
 
     public PowerUp (Point p) {
         this.loc=p;
         BufferedImage temp = imageLoadersinge.getLoadedImage();
-        imgs = temp.getSubimage(0, 3*32,32,32);
+
+        switch (n) {
+            case 0:
+                imgs = temp.getSubimage(80, 60,40,40);
+                break;
+            case 1:
+                imgs = temp.getSubimage(80, 20,40,40);
+                break;
+            case 2:
+                imgs = temp.getSubimage(40, 60,40,40);
+                break;
+            case 3:
+                imgs = temp.getSubimage(40, 20,40,40);
+                break;
+        }
+        /*
+
+        imgs = temp.getSubimage(40, 20,40,40); //für Mond
+        imgs = temp.getSubimage(40, 60,40,40); //für Schere
+        imgs = temp.getSubimage(80, 60,40,40); //für Blitz
+
+         */
     }
 
     public void draw(Graphics g) {
+
         g.drawImage(imgs, loc.getLocation().x, loc.getLocation().y, null);
     }
 
     public void onHitSP(SnakeJon hitter, Singleplayer sp) {
-        Random rand = new Random();
-        int n =rand.nextInt(4);
+
         switch (n) {
             case 0:
 
