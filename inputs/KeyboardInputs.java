@@ -28,6 +28,9 @@ public class KeyboardInputs implements KeyListener {
             case SINGLEPLAYER:
                 gamePanel.getGame().getPlaying().keyReleased(e);
                 break;
+            case LOKAL_MULTIPLAYER:
+                gamePanel.getGame().getLocal_Multiplayer().keyReleased(e);
+                break;
             default:
                 break;
 
@@ -42,6 +45,9 @@ public class KeyboardInputs implements KeyListener {
                 break;
             case SINGLEPLAYER:
                 gamePanel.getGame().getPlaying().keyPressed(e);
+                break;
+            case LOKAL_MULTIPLAYER:
+                gamePanel.getGame().getLocal_Multiplayer().keyPressed(e);
                 break;
             default:
                 break;

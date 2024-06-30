@@ -2,6 +2,7 @@ package UIElement;
 
 import Gamestates.Gamestate;
 import Objekts.Snake;
+import Objekts.SnakeJon;
 import imageLoader.ImageLoaderabstract;
 
 import java.awt.*;
@@ -14,9 +15,9 @@ public class Food {
     private BufferedImage imgs;
     private final ImageLoaderabstract imageLoadersinge = new ImageLoaderabstract("/snake-graphics32.png");
     private Gamestate gamestate;
-    private Snake snake;
     private Random random;
     private Rectangle2D.Float hitbox;
+    private SnakeJon snakejon;
 
     public Food(int xPos, int yPos){
     random = new Random();
@@ -30,12 +31,14 @@ public class Food {
 
 
 
-    public void foodhit(int[][] player) {
+    public void foodhit(Rectangle2D.Float hitboxp1, SnakeJon snakejon) {
 
-        if (player[0][0] == xPos && player[1][0] == yPos) {
+        if (hitbox.intersects(hitboxp1)) {
             xPos = random.nextInt(20) * 32;
             yPos = random.nextInt(20) * 32;
-
+            hitbox.x = xPos;
+            hitbox.y = yPos;
+            snakejon.addpart();
         }
     }
 
