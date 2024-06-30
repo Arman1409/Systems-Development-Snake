@@ -26,7 +26,6 @@ public class Food {
     loadfood();
     hitbox = new Rectangle2D.Float(xPos, yPos, 32, 32);
 
-
     }
 
 

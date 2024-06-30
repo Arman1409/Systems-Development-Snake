@@ -29,6 +29,7 @@ public class Singleplayer extends State implements StartMethods {
     private PowerUp pup;
     private boolean darkMode=false;
 
+
     public Singleplayer(Game game) {
         super(game);
 
@@ -58,6 +59,7 @@ public class Singleplayer extends State implements StartMethods {
     public void update() {
         snakeTest.update();
         food.foodhit(snakeTest.getHitbox(),snakeTest);
+        pup.onHitSP(snakeTest.getHitbox(),snakeTest,this);
 
     }
     public void setDarkMode(){
