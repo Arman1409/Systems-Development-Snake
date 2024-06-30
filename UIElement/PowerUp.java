@@ -1,5 +1,6 @@
 package UIElement;
 
+import Gamestates.Local_Multiplayer;
 import Gamestates.Multiplayer;
 import Gamestates.Singleplayer;
 import Objekts.SnakeJon;
@@ -129,7 +130,7 @@ public class PowerUp {
     }
 
 
-    public void onHitMP(Rectangle2D.Float hitboxp1, SnakeJon hitter, SnakeJon enemy, Multiplayer mp) {
+    public void onHitMP(Rectangle2D.Float hitboxp1, SnakeJon hitter, SnakeJon enemy, Local_Multiplayer mp) {
         BufferedImage temp = imageLoadersinge.getLoadedImage();
 
         if (hitbox.intersects(hitboxp1)) {
@@ -140,10 +141,10 @@ public class PowerUp {
 
             switch (n) {
                 case 0:
-                    hitter.setSpeed(4);
+                    hitter.setSpeed(1.05);
                     break;
                 case 1:
-                    enemy.setSpeed(1);
+                    enemy.setSpeed(0.5);
                     break;
                 case 2:
                     enemy.halfBody();

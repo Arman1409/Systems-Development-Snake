@@ -1,7 +1,6 @@
 package UIElement;
 
 import Gamestates.Gamestate;
-import Objekts.Snake;
 import Objekts.SnakeJon;
 import imageLoader.ImageLoaderabstract;
 

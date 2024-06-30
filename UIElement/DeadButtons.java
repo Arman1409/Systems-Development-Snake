@@ -15,17 +15,17 @@ public class DeadButtons {
     private boolean mouseOver, mousePressed;
     private Rectangle bounds;
 
-    public DeadButtons(int x, int y, int rowIndex,Gamestate state) {
+    public DeadButtons(int x, int y, int rowIndex) {
         this.xPos = x;
         this.yPos = y;
         this.rowIndex = rowIndex;
-        this.state = state;
+
         initBounds();
        loadImgs();
 
     }
     private void initBounds() {
-        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 200, 200);
+        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 150, 150);
 
     }
     private void loadImgs() {
@@ -36,7 +36,7 @@ public class DeadButtons {
     }
 
     public void draw(Graphics g) {
-        g.drawImage(imgs[index], xPos - xOffsetCenter, yPos, 200, 200, null);
+        g.drawImage(imgs[index], xPos - xOffsetCenter, yPos, 150, 150, null);
 
 
     }

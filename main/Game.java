@@ -23,6 +23,7 @@ public class Game extends JFrame implements Runnable  {
     private EXIT exit;
     private Local_Multiplayer local_Multiplayer;
     private Multiplayer multiplayer;
+    private Retry retry;
 
     private GamePanel gamePanel;
     private GameWindow gameWindow;
@@ -53,11 +54,12 @@ public class Game extends JFrame implements Runnable  {
     }
 
     private void initClasses() {
-       menu = new Menu(this);
+        menu = new Menu(this);
        singleplayer = new Singleplayer(this);
        local_Multiplayer = new Local_Multiplayer(this);
        dead = new DEAD(this);
-       exit = new EXIT();
+       retry =  new Retry(this);
+      // exit = new EXIT();
         try {
             multiplayer = new Multiplayer(this);
         } catch (IOException e) {
@@ -74,6 +76,11 @@ public class Game extends JFrame implements Runnable  {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     */
+    }
+    public void gcmaker(){
+      Gamestate.state = Gamestate.EXIT;
+        initClasses();
+        Gamestate.state = Gamestate.MENU;
     }
 
     private void startserver (){
@@ -102,7 +109,7 @@ public class Game extends JFrame implements Runnable  {
             break;
 
             case MULTIPLAYER:
-                multiplayer.update();
+                //multiplayer.update();
                 break;
 
             case DEAD:
@@ -115,6 +122,10 @@ public class Game extends JFrame implements Runnable  {
 
             case LOKAL_MULTIPLAYER:
                 local_Multiplayer.update();
+                break;
+
+            case RETRY:
+                retry.update();
                 break;
             default:
                 break;
@@ -218,5 +229,17 @@ public class Game extends JFrame implements Runnable  {
 
     public Local_Multiplayer getLocal_Multiplayer() {
         return local_Multiplayer;
+    }
+
+    public void setSingleplayer(Singleplayer singleplayer) {
+        this.singleplayer = singleplayer;
+    }
+
+    public void setLocal_Multiplayer(Local_Multiplayer local_Multiplayer) {
+        this.local_Multiplayer = local_Multiplayer;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 }
