@@ -1,25 +1,32 @@
 package Gamestates;
 
+import Objekts.Snake;
 import UIElement.DeadButtons;
 import UIElement.DeadButtons;
 import imageLoader.ImageLoaderabstract;
 import main.Game;
+import main.Score;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class DEAD extends State implements StartMethods {
     private DeadButtons[] buttons = new DeadButtons[2];
     private BufferedImage backgroundImg;
     private int deadX, deadY, deadWidth, deadHeight;
     private final ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Deadscreen.png");
+    private Score score;
+    private Snake snake;
 
     public DEAD(Game game) {
         super(game);
         loadBackground();
         loadButtons();
+
+
 
 
     }

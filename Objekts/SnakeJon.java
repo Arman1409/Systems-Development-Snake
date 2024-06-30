@@ -151,4 +151,12 @@ public class SnakeJon {
     public void setDirection(char direction) {
         this.direction = direction;
     }
+
+    public ArrayList<Point> getBody() {
+        return body;
+    }
+
+    public void setBody(ArrayList<Point> body) {
+        this.body = body;
+    }
 }

@@ -2,13 +2,19 @@ package Objekts.Utilities;
 
 import Gamestates.Gamestate;
 import Objekts.Snake;
+import Objekts.SnakeJon;
+import main.Score;
 
+import java.awt.*;
+import java.util.ArrayList;
 
 
 public class ColissionControll {
 
     private Gamestate gamestate;
-    private Snake snake;
+    //private Snake snake;
+    private SnakeJon snake;
+    private Score score;
 
     private int WIDTH;
     private int HEIGHT;
@@ -27,11 +33,20 @@ public class ColissionControll {
             if (player[0][0] == player[0][i] && player[1][0] == player[1][i]) {
                 Gamestate.state = Gamestate.DEAD;
 
+                ArrayList<Point> body = snake.getBody();
+                int finalLength = body.size();
+                System.out.println(score.calcScore(finalLength));
+
+
            }
         }
         // check if head run into walls
        if (player[0][0] < 0 || player[0][0] > WIDTH || player[1][0] < 0 || player[1][0] > HEIGHT) {
             Gamestate.state = Gamestate.DEAD;
+
+           ArrayList<Point> body = snake.getBody();
+           int finalLength = body.size();
+           System.out.println(score.calcScore(finalLength));
 
         }
 

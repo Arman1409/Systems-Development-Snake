@@ -8,6 +8,11 @@ import java.util.Scanner;
 
 public class Score {
 
+    public int calcScore (int snakeLength){
+        int finalScore = snakeLength - 5;
+        return finalScore;
+    }
+
     public int readScoreFile(int scorep1) {
 
         String scoreString = String.valueOf(scorep1);
