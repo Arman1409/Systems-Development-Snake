@@ -2,6 +2,7 @@ package Gamestates;
 
 import Objekts.Snake;
 import Objekts.SnakeJon;
+import Objekts.Utilities.ColissionControll;
 import UIElement.Food;
 import UIElement.PowerUp;
 import imageLoader.ImageLoaderabstract;
@@ -27,16 +28,19 @@ public class Local_Multiplayer extends State implements StartMethods{
     Random rand = new Random();
     private PowerUp pup;
     private boolean darkMode=false;
+    private ColissionControll cc;
 
     public Local_Multiplayer(Game game){
         super(game);
-        snake1 = new SnakeJon(new Point(100,100),'R');
-        snake2 = new SnakeJon(new Point(300,100),'L');
+        snake1 = new SnakeJon(new Point(100,100),'R',"snake-graphics32.png");
+        snake2 = new SnakeJon(new Point(300,400),'L',"snake2-graphics32.png");
         food = new Food(rand.nextInt(20)*32, rand.nextInt(20)*32 );
         pup= new PowerUp(new Point(rand.nextInt(20)*32, rand.nextInt(20)*32));
         loadBackground();
+        cc = new ColissionControll(640,640);
         score = new Score();
         score.readScoreFile(scorep1);
+
 
     }
     private void loadBackground() {
@@ -51,7 +55,10 @@ public class Local_Multiplayer extends State implements StartMethods{
     @Override
     public void update() {
         snake1.update();
-        food.foodhit(snake1.getHitbox(), snake1);
+        snake2.update();
+       food.foodhit(snake1.getHitbox(), snake1);
+       cc.checkHitp2(snake1.getBody(),snake2.getBody());
+
     }
     public void setDarkMode(){
         new Thread(new Runnable()
@@ -77,11 +84,12 @@ public class Local_Multiplayer extends State implements StartMethods{
             g.setColor(Color.black);
             g.fillRect(0,0, 640, 640);
             snake1.drawHeadOnly(g);
+            snake2.drawHeadOnly(g);
         } else {
             g.drawImage(backgroundImg, 0, 0, 640, 640, null);
 
-            // snake.draw(g);
             snake1.draw(g);
+            snake2.draw(g);
             pup.draw(g);
             food.draw(g);
         }
@@ -128,6 +136,26 @@ public class Local_Multiplayer extends State implements StartMethods{
             case KeyEvent.VK_DOWN:
                 if (snake1.getDirection() != 'U') {
                     snake1.setDirection('D');
+                }
+                break;
+            case KeyEvent.VK_A:
+                if (snake2.getDirection() != 'R') {
+                    snake2.setDirection('L');
+                }
+                break;
+            case KeyEvent.VK_D:
+                if (snake2.getDirection() != 'L') {
+                    snake2.setDirection('R');
+                }
+                break;
+            case KeyEvent.VK_W:
+                if (snake2.getDirection() != 'D') {
+                    snake2.setDirection('U');
+                }
+                break;
+            case KeyEvent.VK_S:
+                if (snake2.getDirection() != 'U') {
+                    snake2.setDirection('D');
                 }
                 break;
         }

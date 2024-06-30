@@ -42,35 +42,47 @@ public class ColissionControll {
 
 
 
-   /*
-    public void checkHitp2() {
+
+    public void checkHitp2(ArrayList<Point> player1 ,ArrayList<Point> player2) {
         // check if head run into its body
-        for (int i = length[1]; i > 0; i--) {
-            if (player1[0][0] == player1[0][i] && player1[1][0] == player1[1][i]) {
-                running = false;
-            } else if (player2[0][0] == player2[0][i] && player2[1][0] == player2[1][i]) {
-                running = false;
+        for (int i = player1.size()-1; i > 0; i--) {
+            if (player1.get(0).x == player1.get(i).x && player1.get(0).y == player1.get(i).y) {
+                Gamestate.state = Gamestate.DEAD;
+            }
+        }
+        for (int i = player2.size()-1; i > 0; i--) {
+            if (player2.get(0).x == player2.get(i).x && player2.get(0).y == player2.get(i).y) {
+                Gamestate.state = Gamestate.DEAD;
             }
         }
         // check if head run into walls
-        if (player1[0][0] < 0 || player1[0][0] > WIDTH || player1[1][0] < 0 || player1[1][0] > HEIGHT) {
-            running = false;
-        } else if (player2[0][0] < 0 || player2[0][0] > WIDTH || player2[1][0] < 0 || player2[1][0] > HEIGHT) {
-            running = false;
+        if (player1.get(0).x < 0 || player1.get(0).x > WIDTH || player1.get(0).y < 0 ||player1.get(0).y > HEIGHT) {
+            Gamestate.state = Gamestate.DEAD;
+        } else  if (player2.get(0).x < 0 || player2.get(0).x > WIDTH || player2.get(0).y < 0 ||player2.get(0).y > HEIGHT) {
+        Gamestate.state = Gamestate.DEAD;
+        }
+
+        int size = 0;
+        if (player1.size()>= player2.size()) {
+            size = player2.size()-1;
+        }else for (int i = player1.size()-1; i > 0; i--) {
+            size = player1.size()-1;
+        }
+        for (int i = size; i > 0; i--) {
+         if(player1.getFirst().x == player2.get(i).x && player1.getFirst().y == player2.get(i).y) {
+             Gamestate.state = Gamestate.DEAD;
+             System.out.println("P1 lost");
+         }else if (player2.getFirst().x == player1.get(i).x && player2.getFirst().y == player1.get(i).y) {
+             Gamestate.state = Gamestate.DEAD;
+             System.out.println("P2 lost");
+         }
+
         }
 
 
-        for (int i = length[0]; i > 0; i--) {
-            if (player1[0][i] == player2[0][i] && player1[1][i] == player2[1][i]) {
-                System.out.println(player1[0][i]);
-            }
 
-        }
-
-        if (!running) {
 
         }
     }
 
-    */
-}
+

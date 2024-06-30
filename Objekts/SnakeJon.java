@@ -22,12 +22,12 @@ public class SnakeJon {
     int direction=1;//1=left, 2=right, 3=up, 4=down
     int unitsize=32;
     BufferedImage[] tiles =new BufferedImage[20];
+    private String res;
 
     private Rectangle2D.Float Hitbox;
-    private ColissionControll cc;
 
-    public SnakeJon(Point p,char dir) {
-        cc = new ColissionControll(WIDTH,HEIGHT);
+    public SnakeJon(Point p,char dir,String res) {
+        this.res=res;
         this.direction=dir;
         this.body.add(p);
         this.body.add(p);
@@ -47,7 +47,7 @@ public class SnakeJon {
 
     private void initializeTiles() {
         BufferedImage  image;
-        InputStream is1 = getClass().getResourceAsStream("/res/snake-graphics32.png");
+        InputStream is1 = getClass().getResourceAsStream("/res/"+res);
         try {
             image = ImageIO.read(is1);
         } catch (IOException e) {
@@ -165,7 +165,6 @@ public class SnakeJon {
 
     public void update() {
         move();
-        cc.checkHitp1(body);
     }
 
     public void setSpeed(double i) {
@@ -188,7 +187,7 @@ public class SnakeJon {
     }
 
     public void addpart(){
-        body.add(2,getBody().get(1).getLocation());
+        body.addLast(body.getLast().getLocation());
     }
 
     public void setDirection(char direction) {

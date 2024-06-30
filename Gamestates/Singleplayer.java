@@ -2,6 +2,7 @@ package Gamestates;
 
 import Objekts.Snake;
 import Objekts.SnakeJon;
+import Objekts.Utilities.ColissionControll;
 import UIElement.Food;
 import UIElement.PowerUp;
 import imageLoader.ImageLoaderabstract;
@@ -28,15 +29,17 @@ public class Singleplayer extends State implements StartMethods {
     Random rand = new Random();
     private PowerUp pup;
     private boolean darkMode=false;
+    private ColissionControll cc;
 
 
     public Singleplayer(Game game) {
         super(game);
-       // snake = new Snake();
-        snakeTest = new SnakeJon(new Point(100,100),'R');
+
+        snakeTest = new SnakeJon(new Point(100,100),'R',"snake-graphics32.png");
         food = new Food(rand.nextInt(20)*32, rand.nextInt(20)*32 );
         pup= new PowerUp(new Point(rand.nextInt(20)*32, rand.nextInt(20)*32));
         loadBackground();
+        cc = new ColissionControll(640,640);
         score = new Score();
         score.readScoreFile(scorep1);
 
@@ -60,6 +63,8 @@ public class Singleplayer extends State implements StartMethods {
         snakeTest.update();
         food.foodhit(snakeTest.getHitbox(),snakeTest);
         pup.onHitSP(snakeTest.getHitbox(),snakeTest,this);
+        cc.checkHitp1(snakeTest.getBody());
+
 
     }
     public void setDarkMode(){
