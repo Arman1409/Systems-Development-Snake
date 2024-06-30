@@ -46,8 +46,8 @@ public class Multiplayer extends State implements StartMethods {
         super(game);
         food = new Food(rand.nextInt(20) * 32, rand.nextInt(20) * 32);
         pup = new PowerUp(new Point(rand.nextInt(20) * 32, rand.nextInt(20) * 32));
-        snakeJon = new SnakeJon(new Point(100,100),'R');
-        snakeJon2 = new SnakeJon(new Point(100,100),'R');
+        snakeJon = new SnakeJon(new Point(100,100),'R',"snake-graphics32.png");
+        snakeJon2 = new SnakeJon(new Point(100,100),'R',"snake2-graphics32.png");
         startConnection();
         setID();
     }

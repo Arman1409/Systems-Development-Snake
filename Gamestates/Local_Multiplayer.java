@@ -30,8 +30,8 @@ public class Local_Multiplayer extends State implements StartMethods{
 
     public Local_Multiplayer(Game game){
         super(game);
-        snake1 = new SnakeJon(new Point(100,100),'R');
-        snake2 = new SnakeJon(new Point(300,100),'L');
+        snake1 = new SnakeJon(new Point(100,100),'R',"snake-graphics32.png");
+        snake2 = new SnakeJon(new Point(300,100),'L',"snake2-graphics32.png");
         food = new Food(rand.nextInt(20)*32, rand.nextInt(20)*32 );
         pup= new PowerUp(new Point(rand.nextInt(20)*32, rand.nextInt(20)*32));
         loadBackground();
@@ -51,6 +51,7 @@ public class Local_Multiplayer extends State implements StartMethods{
     @Override
     public void update() {
         snake1.update();
+        snake2.update();
         food.foodhit(snake1.getHitbox(), snake1);
     }
     public void setDarkMode(){
@@ -77,11 +78,12 @@ public class Local_Multiplayer extends State implements StartMethods{
             g.setColor(Color.black);
             g.fillRect(0,0, 640, 640);
             snake1.drawHeadOnly(g);
+            snake2.drawHeadOnly(g);
         } else {
             g.drawImage(backgroundImg, 0, 0, 640, 640, null);
 
-            // snake.draw(g);
             snake1.draw(g);
+            snake2.draw(g);
             pup.draw(g);
             food.draw(g);
         }
