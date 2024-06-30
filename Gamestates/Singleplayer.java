@@ -3,6 +3,7 @@ package Gamestates;
 import Objekts.Snake;
 import Objekts.SnakeJon;
 import UIElement.Food;
+import UIElement.PowerUp;
 import imageLoader.ImageLoaderabstract;
 import main.Game;
 import main.Score;
@@ -12,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Singleplayer extends State implements StartMethods {
 
@@ -22,12 +24,17 @@ public class Singleplayer extends State implements StartMethods {
     private int singleX, singleY, singeWidth, singleHeight;
     private int scorep1 = 0;
     private Score score;
-
+    private Food food;
+    Random rand = new Random();
+    private PowerUp pup;
+    private boolean darkMode=false;
 
     public Singleplayer(Game game) {
         super(game);
        // snake = new Snake();
-        snakeTest = new SnakeJon(new Point(100,100),1);
+        snakeTest = new SnakeJon(new Point(100,100),'R');
+        food = new Food(rand.nextInt(20)*32, rand.nextInt(20)*32 );
+        pup= new PowerUp(new Point(rand.nextInt(20)*32, rand.nextInt(20)*32));
         loadBackground();
         score = new Score();
         score.readScoreFile(scorep1);
@@ -49,16 +56,42 @@ public class Singleplayer extends State implements StartMethods {
 
     @Override
     public void update() {
-   // snake.update();
-    snakeTest.update();
+        snakeTest.update();
+
+    }
+    public void setDarkMode(){
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                darkMode=true;
+
+                try {
+                    Thread.sleep(7000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                darkMode=false;
+            }
+        }).start();
     }
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImg, 0, 0,640,640, null);
+        if (darkMode) {
+            g.setColor(Color.black);
+            g.fillRect(0,0, 640, 640);
+            snakeTest.drawHeadOnly(g);
+        } else {
+            g.drawImage(backgroundImg, 0, 0, 640, 640, null);
 
-     //   snake.draw(g);
-        snakeTest.draw(g);
+           // snake.draw(g);
+            snakeTest.draw(g);
+            pup.draw(g);
+            food.draw(g);
+        }
     }
 
     @Override

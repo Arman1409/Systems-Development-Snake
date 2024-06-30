@@ -2,6 +2,9 @@ package Gamestates;
 
 import Objekts.Snake;
 import Objekts.Snake2;
+import Objekts.SnakeJon;
+import UIElement.Food;
+import UIElement.PowerUp;
 import imageLoader.ImageLoaderabstract;
 import main.Game;
 
@@ -15,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Random;
 
 public class Multiplayer extends State implements StartMethods {
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Gamebackground_.png");
@@ -31,9 +35,19 @@ public class Multiplayer extends State implements StartMethods {
     private BufferedReader in;
     private boolean isFirstClient;
     private Snake gamePanel;
+    private boolean darkMode = false;
+    private Food food;
+    Random rand = new Random();
+    private PowerUp pup;
+    private SnakeJon snakeJon;
+    private SnakeJon snakeJon2;
 
     public Multiplayer(Game game) throws IOException {
         super(game);
+        food = new Food(rand.nextInt(20) * 32, rand.nextInt(20) * 32);
+        pup = new PowerUp(new Point(rand.nextInt(20) * 32, rand.nextInt(20) * 32));
+        snakeJon = new SnakeJon(new Point(100,100),'R');
+        snakeJon2 = new SnakeJon(new Point(100,100),'R');
         startConnection();
         setID();
     }
@@ -89,15 +103,26 @@ public class Multiplayer extends State implements StartMethods {
         try {
             getDirection2();
         } catch (IOException e) {
-           System.out.println("IO Exception");
+            System.out.println("IO Exception");
         }
         //if both connected
     }
 
     @Override
     public void draw(Graphics g) {
-        snake.draw(g);
-        snake2.draw(g);
+        if (darkMode) {
+            g.setColor(Color.black);
+            g.fillRect(0, 0, singeWidth, singleHeight);
+            snakeJon.drawHeadOnly(g);
+            snakeJon2.drawHeadOnly(g);
+        } else {
+            g.drawImage(backgroundImg, 0, 0, singeWidth, singleHeight, null);
+
+            snakeJon2.draw(g);
+            snakeJon2.draw(g);
+            pup.draw(g);
+            food.draw(g);
+        }
         //if both connected
     }
 
@@ -184,5 +209,22 @@ public class Multiplayer extends State implements StartMethods {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    public void setDarkMode() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                darkMode = true;
+
+                try {
+                    Thread.sleep(7000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                darkMode = false;
+            }
+        }).start();
     }
 }

@@ -24,8 +24,9 @@ public class SnakeJon {
 
     private ColissionControll cc;
 
-    public SnakeJon(Point p,int dir) {
+    public SnakeJon(Point p,char dir) {
         cc = new ColissionControll(WIDTH,HEIGHT);
+        this.direction=dir;
         this.body.add(p);
         this.body.add(p);
         this.body.add(p);
@@ -34,6 +35,11 @@ public class SnakeJon {
         this.body.add(p);
         this.direction=dir;
         this.initializeTiles();
+    }
+    public void halfBody(){
+        for(int i = 0;i<body.size()/2;i++ ){
+            body.removeLast();
+        }
     }
 
     private void initializeTiles() {
@@ -123,14 +129,17 @@ public class SnakeJon {
 
     public void draw(Graphics g) {
 
-        for (int a = 0; a<body.size();a++){
-            g.drawImage(tiles[getCorrectTileNumber(a)],body.get(a).getLocation().x, body.get(a).getLocation().y, null);
-           System.out.println("a="+a+";tile="+getCorrectTileNumber(a));
+        for (int a = 0; a < body.size(); a++) {
+            g.drawImage(tiles[getCorrectTileNumber(a)], body.get(a).getLocation().x, body.get(a).getLocation().y, null);
         }
+    }
 
+    public void drawHeadOnly(Graphics g) {
+        g.drawImage(tiles[getCorrectTileNumber(0)],body.getFirst().getLocation().x, body.getFirst().getLocation().y, null);
 
 
     }
+
 
     public void move(){
         for (int i = 0; i <  this.speed ; i++){
@@ -155,7 +164,22 @@ public class SnakeJon {
     }
 
     public void setSpeed(int i) {
-        this.speed=i;
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                speed = i;
+
+                try {
+                    Thread.sleep(7000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                speed = 2;
+            }
+        }).start();
     }
 
     public void setDirection(char direction) {
