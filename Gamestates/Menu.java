@@ -32,10 +32,10 @@ public class Menu extends State implements StartMethods {
 
     }
     private void loadButtons() {
-        buttons[0] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (300 * Game.SCALE), 0, Gamestate.SINGLEPLAYER);
-        buttons[1] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (400 * Game.SCALE), 1, Gamestate.LOKAL_MULTIPLAYER);
-        buttons[2] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (500 * Game.SCALE), 2, Gamestate.MULTIPLAYER);
-        buttons[3] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (600 * Game.SCALE), 3, Gamestate.EXIT);
+        buttons[0] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (200 * Game.SCALE), 0, Gamestate.SINGLEPLAYER);
+        buttons[1] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (300 * Game.SCALE), 1, Gamestate.LOKAL_MULTIPLAYER);
+        buttons[2] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (400 * Game.SCALE), 2, Gamestate.MULTIPLAYER);
+        buttons[3] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (500 * Game.SCALE), 3, Gamestate.EXIT);
     }
 
 

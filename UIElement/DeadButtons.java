@@ -15,23 +15,24 @@ public class DeadButtons {
     private boolean mouseOver, mousePressed;
     private Rectangle bounds;
 
-    public DeadButtons(int x, int y, int rowIndex) {
+    public DeadButtons(int x, int y, int rowIndex,Gamestate state) {
         this.xPos = x;
         this.yPos = y;
         this.rowIndex = rowIndex;
+        this.state = state;
         initBounds();
        loadImgs();
 
     }
     private void initBounds() {
-        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 200, 100);
+        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 200, 200);
 
     }
     private void loadImgs() {
-        imgs = new BufferedImage[3];
+        imgs = new BufferedImage[2];
         BufferedImage temp = imageLoadersinge.getLoadedImage();
         for (int i = 0; i < imgs.length; i++)
-            imgs[i] = temp.getSubimage(i*250, rowIndex*500, 500, 500);
+            imgs[i] = temp.getSubimage(50+(i*22)*20, rowIndex*500, 500, 500);
     }
 
     public void draw(Graphics g) {
@@ -46,6 +47,9 @@ public class DeadButtons {
             index = 1;
         if (mousePressed)
             index = 2;
+    }
+    public boolean isMouseOver() {
+        return mouseOver;
     }
     public void setMouseOver(boolean mouseOver) {
         this.mouseOver = mouseOver;

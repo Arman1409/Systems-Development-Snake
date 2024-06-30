@@ -2,6 +2,7 @@ package Gamestates;
 
 import UIElement.DeadButtons;
 import UIElement.DeadButtons;
+import UIElement.SingleplayerButton;
 import imageLoader.ImageLoaderabstract;
 import main.Game;
 
@@ -32,8 +33,8 @@ public class DEAD extends State implements StartMethods {
 
     }
     private void loadButtons() {
-        buttons[0] = new DeadButtons((Game.GAME_WIDTH / 2) - 50, (int) (600 * Game.SCALE), 0);
-        buttons[1] = new DeadButtons((Game.GAME_WIDTH / 2) + 150, (int) (600 * Game.SCALE), 1);
+        buttons[0] = new DeadButtons((Game.GAME_WIDTH / 2) - 50, (int) (400 * Game.SCALE), 0,Gamestate.EXIT);
+        buttons[1] = new DeadButtons((Game.GAME_WIDTH / 2) + 150, (int) (400 * Game.SCALE), 1,Gamestate.EXIT);
 
     }
 
@@ -43,16 +44,17 @@ public class DEAD extends State implements StartMethods {
         for(DeadButtons button : buttons){
             button.update();
         }
-
+        checkifpressed();
     }
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImg, 0, 0, deadWidth, deadHeight, null);
+        g.drawImage(backgroundImg, 0, 0, 640, 640, null);
 
         for(DeadButtons button : buttons){
             button.draw(g);
         }
+
     }
 
     @Override
@@ -62,17 +64,40 @@ public class DEAD extends State implements StartMethods {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        for(DeadButtons db : buttons){
+            if(isIn(e,db)){
+                db.setMousePressed(true);
+                break;
+            }
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        for(DeadButtons db : buttons){
+            if(isIn(e,db)){
+                if (db.isMousePressed());
+                db.applyGamestate();
+                break;
+            }
+        }
+        resetButtons();
+    }
+    private void resetButtons() {
+        for (DeadButtons db : buttons)
+            db.resetBools();
 
     }
-
     @Override
     public void mouseMoved(MouseEvent e) {
+        for (DeadButtons db : buttons)
+            db.setMouseOver(false);
 
+        for (DeadButtons db : buttons)
+            if (isIn(e, db)) {
+                db.setMouseOver(true);
+                break;
+            }
     }
 
     @Override
@@ -83,5 +108,10 @@ public class DEAD extends State implements StartMethods {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+    private void checkifpressed() {
+        if (buttons[0].isMousePressed()) {
+            Gamestate.state = Gamestate.SINGLEPLAYER;
+        }
     }
 }

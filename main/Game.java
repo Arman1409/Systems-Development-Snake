@@ -203,4 +203,16 @@ public class Game extends JFrame implements Runnable  {
     public Singleplayer getPlaying() {
         return singleplayer;
     }
+
+    public boolean isRunninggame() {
+        return runninggame;
+    }
+
+    public DEAD getDead() {
+        return dead;
+    }
+
+    public EXIT getExit() {
+        return exit;
+    }
 }
