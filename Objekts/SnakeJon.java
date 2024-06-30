@@ -18,7 +18,7 @@ public class SnakeJon {
     static final int NUMBER_OF_UNITS = (WIDTH * HEIGHT) / (UNIT_SIZE * UNIT_SIZE);
 
     ArrayList<Point> body = new ArrayList<>();
-    int speed=1; //multiplier for speed
+    double speed=1; //multiplier for speed
     int direction=1;//1=left, 2=right, 3=up, 4=down
     int unitsize=32;
     BufferedImage[] tiles =new BufferedImage[20];
@@ -168,7 +168,7 @@ public class SnakeJon {
         cc.checkHitp1(body);
     }
 
-    public void setSpeed(int i) {
+    public void setSpeed(double i) {
         new Thread(new Runnable()
         {
             @Override
@@ -182,7 +182,7 @@ public class SnakeJon {
                     throw new RuntimeException(e);
                 }
 
-                speed = 2;
+                speed = 1;
             }
         }).start();
     }

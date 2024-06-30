@@ -45,7 +45,7 @@ public class Multiplayer extends State implements StartMethods {
     public Multiplayer(Game game) throws IOException {
         super(game);
         food = new Food(rand.nextInt(20) * 32, rand.nextInt(20) * 32);
-        pup = new PowerUp(new Point(rand.nextInt(20) * 32, rand.nextInt(20) * 32));
+        //pup = new PowerUp(new Point(rand.nextInt(20) * 32, rand.nextInt(20) * 32));
         snakeJon = new SnakeJon(new Point(100,100),'R');
         snakeJon2 = new SnakeJon(new Point(100,100),'R');
         startConnection();

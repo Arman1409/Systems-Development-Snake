@@ -26,7 +26,7 @@ public class ColissionControll {
 
         // check if head run into its body
         for (int i = player.size()-1; i > 0; i--) {
-            if (player.get(0).x == player.get(i).y && player.get(0).y == player.get(i).x) {
+            if (player.get(0).x == player.get(i).x && player.get(0).y == player.get(i).y) {
                 Gamestate.state = Gamestate.DEAD;
 
            }
