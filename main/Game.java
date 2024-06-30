@@ -54,12 +54,12 @@ public class Game extends JFrame implements Runnable  {
     }
 
     private void initClasses() {
-       menu = new Menu(this);
+        menu = new Menu(this);
        singleplayer = new Singleplayer(this);
        local_Multiplayer = new Local_Multiplayer(this);
        dead = new DEAD(this);
        retry =  new Retry(this);
-       exit = new EXIT();
+      // exit = new EXIT();
         try {
             multiplayer = new Multiplayer(this);
         } catch (IOException e) {
@@ -78,6 +78,7 @@ public class Game extends JFrame implements Runnable  {
     */
     }
     public void gcmaker(){
+      Gamestate.state = Gamestate.EXIT;
         initClasses();
         Gamestate.state = Gamestate.MENU;
     }

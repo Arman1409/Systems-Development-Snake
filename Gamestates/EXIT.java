@@ -16,7 +16,6 @@ public class EXIT  implements StartMethods{
 
     @Override
     public void update() {
-        System.exit(0);
     }
 
     @Override

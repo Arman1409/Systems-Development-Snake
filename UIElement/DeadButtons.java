@@ -25,7 +25,7 @@ public class DeadButtons {
 
     }
     private void initBounds() {
-        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 200, 200);
+        bounds = new Rectangle(xPos - xOffsetCenter, yPos, 150, 150);
 
     }
     private void loadImgs() {
@@ -36,7 +36,7 @@ public class DeadButtons {
     }
 
     public void draw(Graphics g) {
-        g.drawImage(imgs[index], xPos - xOffsetCenter, yPos, 200, 200, null);
+        g.drawImage(imgs[index], xPos - xOffsetCenter, yPos, 150, 150, null);
 
 
     }

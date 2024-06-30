@@ -43,15 +43,6 @@ public class Singleplayer extends State implements StartMethods {
 
     }
 
-    public void reset(){
-        snakeTest = new SnakeJon(new Point(320,192),'R',"snake-graphics32.png");
-        food = new Food(rand.nextInt(20)*32, rand.nextInt(20)*32 );
-        pup= new PowerUp(new Point(rand.nextInt(20)*32, rand.nextInt(20)*32));
-        loadBackground();
-        cc = new ColissionControll(640,640);
-        score = new Score();
-        score.readScoreFile(scorep1);
-    }
 
 
     private void loadBackground() {

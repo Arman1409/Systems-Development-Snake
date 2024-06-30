@@ -33,8 +33,8 @@ public class DEAD extends State implements StartMethods {
 
     }
     private void loadButtons() {
-        buttons[0] = new DeadButtons((Game.GAME_WIDTH / 2) - 50, (int) (400 * Game.SCALE), 0);
-        buttons[1] = new DeadButtons((Game.GAME_WIDTH / 2) + 150, (int) (400 * Game.SCALE), 1);
+        buttons[0] = new DeadButtons((Game.GAME_WIDTH / 2) - 150, (int) (400 * Game.SCALE), 0);
+        buttons[1] = new DeadButtons((Game.GAME_WIDTH / 2) + 280, (int) (400 * Game.SCALE), 1);
 
     }
 
@@ -54,7 +54,10 @@ public class DEAD extends State implements StartMethods {
         for(DeadButtons button : buttons){
             button.draw(g);
         }
-
+        g.setColor(Color.white);
+        g.setFont(new Font("Sans serif", Font.ROMAN_BASELINE, 30));
+        g.drawString("Score: " + , (Game.GAME_WIDTH / 2)-100, (int) (400 * Game.SCALE));
+        g.drawString("Max Score", (Game.GAME_WIDTH / 2)-120, (int) (450 * Game.SCALE));
     }
 
     @Override
@@ -66,7 +69,7 @@ public class DEAD extends State implements StartMethods {
     public void mousePressed(MouseEvent e) {
         for(DeadButtons db : buttons){
             if(isIn(e,db)){
-                game.gcmaker();
+
                 db.setMousePressed(true);
 
                 break;
@@ -115,7 +118,9 @@ public class DEAD extends State implements StartMethods {
     }
     private void checkifpressed() {
         if (buttons[0].isMousePressed()) {
-            Gamestate.state = Gamestate.SINGLEPLAYER;
+            game.gcmaker();
+        }else if (buttons[1].isMousePressed()) {
+            System.exit(0);
         }
     }
 }
