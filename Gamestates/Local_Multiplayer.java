@@ -14,6 +14,16 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * The Local_Multiplayer class represents the state of the game when the game is in local multiplayer mode.
+ * <p>
+ * This class is responsible for updating and drawing the local multiplayer state of the game.
+ * It also handles mouse and key events in this state.
+ * </p>
+ *
+ * @author
+ */
+
 public class Local_Multiplayer extends State implements StartMethods{
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Gamebackground_.png");
     private SnakeJon snake1;
@@ -28,6 +38,12 @@ public class Local_Multiplayer extends State implements StartMethods{
     private boolean darkMode=false;
     private ColissionControll cc;
 
+    /**
+     * This constructor initializes a new instance of the Local_Multiplayer class.
+     *
+     * @param game This is the game instance.
+     */
+
     public Local_Multiplayer(Game game){
         super(game);
         snake1 = new SnakeJon(new Point(320,192),'R',"snake-graphics32.png");
@@ -41,6 +57,11 @@ public class Local_Multiplayer extends State implements StartMethods{
 
 
     }
+
+    /**
+     * This method is used to load the background image.
+     */
+
     private void loadBackground() {
         backgroundImg = imageLoader.getLoadedImage();
         singeWidth = (int) (backgroundImg.getWidth() * Game.SCALE);
@@ -49,6 +70,10 @@ public class Local_Multiplayer extends State implements StartMethods{
         singleY = (int) (45 * Game.SCALE);
 
     }
+
+    /**
+     * This method is used to update the local multiplayer state.
+     */
 
     @Override
     public void update() {
@@ -59,8 +84,14 @@ public class Local_Multiplayer extends State implements StartMethods{
        pup.onHitMP(snake1.getHitbox(),snake1,snake2,this);
        pup.onHitMP(snake2.getHitbox(),snake2,snake1,this);
        cc.checkHitp2(snake1.getBody(),snake2.getBody(),snake1,snake2);
+       snake1.setIsformultiplayer(true);
 
     }
+
+    /**
+     * This method is used to set the dark mode.
+     */
+
     public void setDarkMode(){
         new Thread(new Runnable()
         {
@@ -79,6 +110,13 @@ public class Local_Multiplayer extends State implements StartMethods{
             }
         }).start();
     }
+
+    /**
+     * This method is used to draw the local multiplayer state.
+     *
+     * @param g This is the graphics object to draw on.
+     */
+
     @Override
     public void draw(Graphics g) {
         if (darkMode) {
@@ -101,20 +139,44 @@ public class Local_Multiplayer extends State implements StartMethods{
 
     }
 
+    /**
+     * This method is triggered when the mouse is pressed.
+     *
+     * @param e This is the mouse event object.
+     */
+
     @Override
     public void mousePressed(MouseEvent e) {
 
     }
+
+    /**
+     * This method is triggered when the mouse is released.
+     *
+     * @param e This is the mouse event object.
+     */
 
     @Override
     public void mouseReleased(MouseEvent e) {
 
     }
 
+    /**
+     * This method is triggered when the mouse is moved.
+     *
+     * @param e This is the mouse event object.
+     */
+
     @Override
     public void mouseMoved(MouseEvent e) {
 
     }
+
+    /**
+     * This method is triggered when a key is pressed.
+     *
+     * @param e This is the key event object.
+     */
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -162,8 +224,22 @@ public class Local_Multiplayer extends State implements StartMethods{
         }
     }
 
+    /**
+     * This method is triggered when a key is released.
+     *
+     * @param e This is the key event object.
+     */
+
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    public SnakeJon getSnake1() {
+        return snake1;
+    }
+
+    public SnakeJon getSnake2() {
+        return snake2;
     }
 }

@@ -17,6 +17,16 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Random;
 
+/**
+ * The Multiplayer class represents the state of the game when the game is in multiplayer mode.
+ * <p>
+ * This class is responsible for updating and drawing the multiplayer state of the game.
+ * It also handles mouse and key events in this state.
+ * </p>
+ *
+ * @author
+ */
+
 public class Multiplayer extends State implements StartMethods {
     private ImageLoaderabstract imageLoader = new ImageLoaderabstract("/WIP.jpeg");
 
@@ -37,6 +47,12 @@ public class Multiplayer extends State implements StartMethods {
     private SnakeJon snake;
     private SnakeJon snake2;
 
+    /**
+     * This constructor initializes a new instance of the Multiplayer class.
+     *
+     * @param game This is the game instance.
+     */
+
     public Multiplayer(Game game) throws IOException {
         super(game);
         loadBackground();
@@ -47,6 +63,11 @@ public class Multiplayer extends State implements StartMethods {
         //startConnection();
         //setID();
     }
+
+    /**
+     * This method is used to load the background image.
+     */
+
     private void loadBackground() {
         backgroundImg = imageLoader.getLoadedImage();
         singeWidth = (int) (backgroundImg.getWidth() * Game.SCALE);
@@ -55,11 +76,23 @@ public class Multiplayer extends State implements StartMethods {
         singleY = (int) (45 * Game.SCALE);
 
     }
+
+    /**
+     * Establishes a Connection with the server And Initializes the Socket, outputStream and InputStream
+     * @throws IOException
+     */
+
     public void startConnection() throws IOException {
         socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
         out = new PrintWriter(socket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
+
+    /**
+     * When a Firrst is recieved From the server it sets the isFirstClient Boolean to true.
+     * With that thee code can differantiate between player one and two
+     * @throws IOException
+     */
 
     public void setID() throws IOException {
         String clientId = in.readLine();
@@ -72,6 +105,12 @@ public class Multiplayer extends State implements StartMethods {
     public boolean getIsFirstClient() {
         return isFirstClient;
     }
+
+    /**
+     * reads Messages rom the server and sets the snake direction for the snake that is played from
+     * the other Client. The Messages are directions recieved from the server.
+     * @throws IOException
+     */
 
     public void getDirection2() throws IOException {// gets the direction from other snake recieved from server
         String message;
@@ -100,6 +139,10 @@ public class Multiplayer extends State implements StartMethods {
             }
         }
     }
+
+    /**
+     * This method is used to update the multiplayer state.
+     */
 
     @Override
     public void update() {
@@ -157,6 +200,12 @@ public class Multiplayer extends State implements StartMethods {
     public void mouseMoved(MouseEvent e) {
 
     }
+
+    /**
+     * Sets the Direction of a Snake when an arrowKey is pressed.
+     * After the direction is set it sends the Direction to the server.
+     * @param e An event which indicates that a keystroke occurred in a component.
+     */
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -243,7 +292,7 @@ public class Multiplayer extends State implements StartMethods {
                 darkMode = false;
             }
 
-     
+
         }
 
      */

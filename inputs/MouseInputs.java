@@ -7,6 +7,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+/**
+ * The MouseInputs class implements the MouseListener and MouseMotionListener interfaces to handle mouse inputs.
+ * <p>
+ * This class is responsible for handling mouse clicked, pressed, released, moved, and dragged events.
+ * The actions performed in response to these events depend on the current game state.
+ * </p>
+ *
+ * @author Dennis Sydow, Nina Brandt, Arman Momtahan
+ */
+
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
     private GamePanel gamePanel;

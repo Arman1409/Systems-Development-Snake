@@ -6,7 +6,23 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Score class is responsible for managing the game scores.
+ * <p>
+ * This class reads and writes scores to a file, and calculates the maximum score.
+ * </p>
+ *
+ * @author Nina Brand, Jan-Hendrik Heise, Arman Momtahan
+ */
+
 public class Score {
+
+    /**
+     * This method reads the score file, adds the new score, calculates the maximum score, and writes the scores back to the file.
+     *
+     * @param scorep1 This is the new score to be added.
+     * @return int This returns the maximum score.
+     */
 
     public int readScoreFile(int scorep1) {
 

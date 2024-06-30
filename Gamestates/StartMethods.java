@@ -4,6 +4,16 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+/**
+ * The StartMethods interface defines the methods that need to be implemented by the game states.
+ * <p>
+ * This interface is used to ensure that all game states have the necessary methods for updating and drawing the state,
+ * as well as handling mouse and key events.
+ * </p>
+ *
+ * @author
+ */
+
 public interface StartMethods {
 
     public void update();

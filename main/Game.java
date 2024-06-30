@@ -7,6 +7,15 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * The Game class extends JFrame and implements Runnable to create the main game window and game loop.
+ * <p>
+ * This class is responsible for initializing the game states, handling game updates and rendering, and managing the game loop.
+ * </p>
+ *
+ * @author Lucas Fabricius, Dennis Sydow, Jonathan Heiher, Nina Brandt
+ */
+
 public class Game extends JFrame implements Runnable  {
 
     public boolean runninggame;
@@ -78,7 +87,7 @@ public class Game extends JFrame implements Runnable  {
     */
     }
     public void gcmaker(){
-      Gamestate.state = Gamestate.EXIT;
+        Gamestate.state = Gamestate.EXIT;
         initClasses();
         Gamestate.state = Gamestate.MENU;
     }

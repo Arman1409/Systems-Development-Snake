@@ -6,6 +6,16 @@ import java.awt.event.KeyListener;
 import Gamestates.Gamestate;
 import main.GamePanel;
 
+/**
+ * The KeyboardInputs class implements the KeyListener interface to handle keyboard inputs.
+ * <p>
+ * This class is responsible for handling key typed, key released, and key pressed events.
+ * The actions performed in response to these events depend on the current game state.
+ * </p>
+ *
+ * @author Dennis Sydow, Lucas Fabrius, Nina Brandt
+ */
+
 public class KeyboardInputs implements KeyListener {
 
     private GamePanel gamePanel;
