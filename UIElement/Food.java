@@ -18,11 +18,10 @@ public class Food {
     private Random random;
     private Rectangle2D.Float hitbox;
 
-    public Food(int xPos, int yPos, int rowIndex){
+    public Food(int xPos, int yPos){
     random = new Random();
     this.xPos = xPos;
     this.yPos = yPos;
-    this.index = rowIndex;
     loadfood();
     hitbox = new Rectangle2D.Float(xPos, yPos, 32, 32);
 
@@ -31,16 +30,13 @@ public class Food {
 
 
 
-    public boolean foodhit(Rectangle2D.Float hitboxplayer) {
+    public void foodhit(int[][] player) {
 
-        if (hitbox.intersects(hitboxplayer)) {
-            xPos = random.nextInt(1000 / 40) * 40;
-            yPos = random.nextInt(1000 / 40) * 40;
-            hitbox.x = xPos;
-            hitbox.y = yPos;
-            return true;
+        if (player[0][0] == xPos && player[1][0] == yPos) {
+            xPos = random.nextInt(20) * 32;
+            yPos = random.nextInt(20) * 32;
+
         }
-    return false;
     }
 
     public void loadfood(){
@@ -49,12 +45,11 @@ public class Food {
     }
 
     public void draw(Graphics g) {
-    g.drawImage(imgs, xPos, yPos,50,50, null);
+        g.drawImage(imgs, xPos, yPos,32,32, null);
     }
 
     public void update() {
 
     }
-
 }
 

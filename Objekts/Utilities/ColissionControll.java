@@ -3,6 +3,8 @@ package Objekts.Utilities;
 import Gamestates.Gamestate;
 import Objekts.Snake;
 
+import java.awt.*;
+import java.util.ArrayList;
 
 
 public class ColissionControll {
@@ -19,18 +21,18 @@ public class ColissionControll {
         this.HEIGHT = HEIGHT;
     }
 
-    public void checkHitp1(int length, int[][] player ) {
+    public void checkHitp1(ArrayList<Point> player) {
 
 
         // check if head run into its body
-        for (int i = length; i > 0; i--) {
-            if (player[0][0] == player[0][i] && player[1][0] == player[1][i]) {
+        for (int i = player.size()-1; i > 0; i--) {
+            if (player.get(0).x == player.get(i).y && player.get(0).y == player.get(i).x) {
                 Gamestate.state = Gamestate.DEAD;
 
            }
         }
         // check if head run into walls
-       if (player[0][0] < 0 || player[0][0] > WIDTH || player[1][0] < 0 || player[1][0] > HEIGHT) {
+       if (player.get(0).x < 0 || player.get(0).x > WIDTH || player.get(0).y < 0 ||player.get(0).y > HEIGHT) {
             Gamestate.state = Gamestate.DEAD;
 
         }
