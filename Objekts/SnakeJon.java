@@ -16,6 +16,8 @@ public class SnakeJon {
     static final int HEIGHT = 640;
     static final int UNIT_SIZE = 32;
     static final int NUMBER_OF_UNITS = (WIDTH * HEIGHT) / (UNIT_SIZE * UNIT_SIZE);
+    private int Scorefinal = 0;
+    boolean isformultiplayer = false;
 
     ArrayList<Point> body = new ArrayList<>();
     double speed=1; //multiplier for speed
@@ -207,5 +209,21 @@ public class SnakeJon {
     }
     public boolean isHit(Point p) {
         return body.contains(p);
+    }
+
+    public int getScorefinal() {
+        return Scorefinal;
+    }
+
+    public boolean isIsformultiplayer() {
+        return isformultiplayer;
+    }
+
+    public void setIsformultiplayer(boolean isformultiplayer) {
+        this.isformultiplayer = isformultiplayer;
+    }
+
+    public void Scoreup() {
+        Scorefinal++;
     }
 }

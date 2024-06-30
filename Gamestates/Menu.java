@@ -9,12 +9,27 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+/**
+ * The Menu class represents the state of the game when the game is in the menu screen.
+ * <p>
+ * This class is responsible for updating and drawing the menu state of the game.
+ * It also handles mouse events in this state.
+ * </p>
+ *
+ * @author
+ */
 
 public class Menu extends State implements StartMethods {
     private SingleplayerButton[] buttons = new SingleplayerButton[4];
     private BufferedImage backgroundImg;
     private int menuX, menuY, menuWidth, menuHeight;
     private final ImageLoaderabstract imageLoader = new ImageLoaderabstract("/Menubackground_.png");
+
+    /**
+     * This constructor initializes a new instance of the Menu class.
+     *
+     * @param game This is the game instance.
+     */
 
     public Menu(Game game) {
         super(game);
@@ -23,10 +38,19 @@ public class Menu extends State implements StartMethods {
 
 
     }
+
+    /**
+     * This method is used to reset the menu.
+     */
+
     public void reset(){
         loadBackground();
         loadButtons();
     }
+
+    /**
+     * This method is used to load the background image.
+     */
 
     private void loadBackground() {
         backgroundImg = imageLoader.getLoadedImage();
@@ -36,6 +60,11 @@ public class Menu extends State implements StartMethods {
         menuY = (int) (45 * Game.SCALE);
 
     }
+
+    /**
+     * This method is used to load the buttons.
+     */
+
     private void loadButtons() {
         buttons[0] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (200 * Game.SCALE), 0, Gamestate.SINGLEPLAYER);
         buttons[1] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (300 * Game.SCALE), 1, Gamestate.LOKAL_MULTIPLAYER);
@@ -43,8 +72,9 @@ public class Menu extends State implements StartMethods {
         buttons[3] = new SingleplayerButton((Game.GAME_WIDTH / 2)+40, (int) (500 * Game.SCALE), 3, Gamestate.EXIT);
     }
 
-
-
+    /**
+     * This method is used to update the menu state.
+     */
 
     @Override
     public void update() {
@@ -53,6 +83,12 @@ public class Menu extends State implements StartMethods {
 
         checkifpressed();
     }
+
+    /**
+     * This method is used to draw the menu state.
+     *
+     * @param g This is the graphics object to draw on.
+     */
 
     @Override
     public void draw(Graphics g) {
@@ -63,10 +99,22 @@ public class Menu extends State implements StartMethods {
             mb.draw(g);
     }
 
+    /**
+     * This method is triggered when the mouse is clicked.
+     *
+     * @param e This is the mouse event object.
+     */
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
     }
+
+    /**
+     * This method is triggered when the mouse is pressed.
+     *
+     * @param e This is the mouse event object.
+     */
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -78,6 +126,12 @@ public class Menu extends State implements StartMethods {
         }
 
     }
+
+    /**
+     * This method is triggered when the mouse is released.
+     *
+     * @param e This is the mouse event object.
+     */
 
     @Override
     public void mouseReleased(MouseEvent e) {

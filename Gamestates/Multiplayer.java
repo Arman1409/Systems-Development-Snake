@@ -55,11 +55,23 @@ public class Multiplayer extends State implements StartMethods {
         singleY = (int) (45 * Game.SCALE);
 
     }
+
+    /**
+     * Establishes a Connection with the server And Initializes the Socket, outputStream and InputStream
+     * @throws IOException
+     */
+
     public void startConnection() throws IOException {
         socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
         out = new PrintWriter(socket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
+
+    /**
+     * When a Firrst is recieved From the server it sets the isFirstClient Boolean to true.
+     * With that thee code can differantiate between player one and two
+     * @throws IOException
+     */
 
     public void setID() throws IOException {
         String clientId = in.readLine();
@@ -72,6 +84,12 @@ public class Multiplayer extends State implements StartMethods {
     public boolean getIsFirstClient() {
         return isFirstClient;
     }
+
+    /**
+     * reads Messages rom the server and sets the snake direction for the snake that is played from
+     * the other Client. The Messages are directions recieved from the server.
+     * @throws IOException
+     */
 
     public void getDirection2() throws IOException {// gets the direction from other snake recieved from server
         String message;
@@ -158,6 +176,12 @@ public class Multiplayer extends State implements StartMethods {
 
     }
 
+    /**
+     * Sets the Direction of a Snake when an arrowKey is pressed.
+     * After the direction is set it sends the Direction to the server.
+     * @param e An event which indicates that a keystroke occurred in a component.
+     */
+
     @Override
     public void keyPressed(KeyEvent e) {
         /*
@@ -243,7 +267,7 @@ public class Multiplayer extends State implements StartMethods {
                 darkMode = false;
             }
 
-     
+
         }
 
      */

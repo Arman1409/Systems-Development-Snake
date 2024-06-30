@@ -37,6 +37,7 @@ public class Food {
             hitbox.x = xPos;
             hitbox.y = yPos;
             snakejon.addpart();
+            snakejon.Scoreup();
         }
     }
 

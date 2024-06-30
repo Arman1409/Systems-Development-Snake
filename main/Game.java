@@ -78,7 +78,7 @@ public class Game extends JFrame implements Runnable  {
     */
     }
     public void gcmaker(){
-      Gamestate.state = Gamestate.EXIT;
+        Gamestate.state = Gamestate.EXIT;
         initClasses();
         Gamestate.state = Gamestate.MENU;
     }

@@ -153,5 +153,10 @@ public class Singleplayer extends State implements StartMethods {
 
     public void mouseDragged(MouseEvent e) {
     }
+
+    public SnakeJon getSnakeTest() {
+        return snakeTest;
+    }
+
 }
 
