@@ -55,7 +55,6 @@ public class Snake {
     length = 5;
     cc = new ColissionControll(WIDTH,
             HEIGHT);
-    food = new Food(500,400,0);
     newsnakepart();
     hitbox = new Rectangle2D.Float(player1[0][0],player1[1][0],32,32);
 
@@ -83,10 +82,8 @@ public class Snake {
 
     public void update() {
     movep1();
-    cc.checkHitp1(length,
-            player1);
 
-    if(food.foodhit(hitbox)){
+    if(false){
         newsnakepart();
         length++;
     }

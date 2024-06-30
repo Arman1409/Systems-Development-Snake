@@ -29,8 +29,8 @@ public class Game extends JFrame implements Runnable  {
 
     public final static float SCALE = 1f;
     public final static int TILES_DEFAULT_SIZE = 32;
-    public final static int TILES_IN_WIDTH = 30;
-    public final static int TILES_IN_HEIGHT = 30;
+    public final static int TILES_IN_WIDTH = 20;
+    public final static int TILES_IN_HEIGHT = 20;
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
     public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
     public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;;
@@ -202,5 +202,17 @@ public class Game extends JFrame implements Runnable  {
 
     public Singleplayer getPlaying() {
         return singleplayer;
+    }
+
+    public boolean isRunninggame() {
+        return runninggame;
+    }
+
+    public DEAD getDead() {
+        return dead;
+    }
+
+    public EXIT getExit() {
+        return exit;
     }
 }
